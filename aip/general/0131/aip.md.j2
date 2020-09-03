@@ -15,7 +15,7 @@ single resource.
 
 ### Requests
 
-Single-resource `GET` methods **must** be made by sending a `GET` request to
+Single-resource `GET` operations **must** be made by sending a `GET` request to
 the resource's path:
 
 ```http
@@ -32,8 +32,8 @@ Accept: application/json
 
 ### Responses
 
-Single-resource `GET` methods **must** return the resource itself, without any
-additional wrapping:
+Single-resource `GET` operations **must** return the resource itself, without
+any additional wrapping:
 
 ```json
 {
@@ -57,7 +57,7 @@ exist, the service **must** reply with an HTTP 404 error.
 
 {% tab proto -%}
 
-Get methods are specified using the following pattern:
+Get operations are specified using the following pattern:
 
 {% sample 'get.proto', 'rpc GetBook' %}
 
@@ -79,7 +79,7 @@ Get methods are specified using the following pattern:
 - There **should** be exactly one `google.api.method_signature` annotation,
   with a value of `"name"`.
 
-Get methods also implement a common request message pattern:
+Get operations also implement a common request message pattern:
 
 {% sample 'get.proto', 'message GetBookRequest' %}
 
@@ -99,7 +99,7 @@ REST/JSON interface is used.
 
 {% tab oas %}
 
-Single-resource `GET` methods **must** be specified with consistent OpenAPI
+Single-resource `GET` operations **must** be specified with consistent OpenAPI
 metadata:
 
 {% sample 'get.oas.yaml', 'paths' %}
@@ -125,4 +125,4 @@ metadata:
 - **2019-08-01**: Changed the examples from "shelves" to "publishers", to
   present a better example of resource ownership.
 - **2019-05-29**: Added an explicit prohibition on arbitrary fields in standard
-  methods.
+  operations.
