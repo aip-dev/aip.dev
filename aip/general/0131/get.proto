@@ -47,12 +47,15 @@ message Book {
   // Format: publishers/{publisher}/books/{book}
   string name = 1;
 
+  // The ISBN (International Standard Book Number) for this book.
+  string isbn = 2;
+
   // The title of the book.
-  string title = 2;
+  string title = 3;
 
   // The author or authors of the book.
-  repeated string authors = 3;
+  repeated string authors = 4;
 
   // The rating assigned to the book.
-  float rating = 4;
+  float rating = 5;
 }

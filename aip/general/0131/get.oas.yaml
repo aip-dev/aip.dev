@@ -25,6 +25,10 @@ components:
           description: |
             The name of the book.
             Format: publishers/{publisher}/books/{book}
+        isbn:
+          type: string
+          description: |
+            The ISBN (International Standard Book Number) for this book.
         title:
           type: string
           description: The title of the book.
