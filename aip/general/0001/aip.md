@@ -44,13 +44,12 @@ and that we largely work on the basis of consensus. However, a limited number
 of designated approvers is necessary, and these committee members will be
 approvers for each AIP on [aip.dev][].
 
-The list of AIP editors is currently:
+The technical steering committee membership is currently:
 
+- Antoine Boyer (@tinnou), Netflix
+- Ross Hamilton (@rhamiltonsf), Salesforce
+- Mike Kistler (@mkistler), IBM
 - Luke Sneeringer (@lukesneeringer), Google
-- ??
-- ??
-- ??
-- ??
 
 The committee is also responsible for the administrative and editorial aspects
 of shepherding AIPs and managing the AIP pipeline and workflow. They approve
@@ -91,13 +90,12 @@ from other approvers.
 
 ### Approved
 
-Once an approved AIP has been agreed upon, it enters "approved" state and is
-considered "best current practice".
+Once an AIP has been agreed upon, it enters "approved" state and is considered
+"best current practice".
 
 AIPs **may** be edited after they are approved, either to correct grammar or
 word choices, or to clarify semantic guidance (in response to reader
-questions). In rare occasions, new guidance **may** be amended when it is more
-useful to readers than creating a new AIP.
+questions). In rare occasions, new guidance **may** be added.
 
 Clarifications and new guidance **must** be reflected in the changelog.
 Correction of typos or minor language alterations **may** be done silently.
@@ -106,6 +104,20 @@ Correction of typos or minor language alterations **may** be done silently.
 **must** provide formal signoff to advance an AIP to the approved state.
 Additionally, there **must not** be formal objections ("changes requested" on
 the GitHub PR) from other approvers.
+
+### Final
+
+If an AIP has been approved for a significant period and the technical steering
+committee is certain that no further guidance will be needed, they **may** move
+the AIP in to "final" state.
+
+AIPs in the final state **must not** be amended with new guidance. They **may**
+be editied to correct spelling, grammar, or clarity provided there are no
+semantic changes.
+
+**Note:** As a formal matter, two AIP approvers **must** provide formal signoff
+to advance an AIP to the final state. Additionally, there **must not** be
+formal objections ("changes requested" on the GItHub PR) from other approvers.
 
 ### Replaced
 
@@ -137,21 +149,24 @@ digraph d_front_back {
   github_pr [ shape="oval" label="GitHub PR" fillcolor="orange" ];
   reviewing [ label="Reviewing" fillcolor="lightskyblue" ];
   approved [ label="Approved" fillcolor="palegreen" ];
+  final [ label="Final" fillcolor="palegreen" ];
   withdrawn [ label="Withdrawn" fillcolor="mistyrose" ];
   replaced [ label="Replaced" fillcolor="lightsteelblue" ];
 
   github_pr -> reviewing;
   reviewing -> approved;
   reviewing -> withdrawn [ style=dashed, color=mistyrose3 ];
+  approved -> final;
   approved -> replaced [ style=dashed, color=lightsteelblue3 ];
+  final -> replaced [ style=dashed color=lightsteelblue3 ];
 }
 ```
 
 ### Proposing an AIP
 
 In order to propose an AIP, first open a pull request with a draft AIP; the AIP
-should conform to the guidance in AIP-8. Most AIPs should be no more than two
-pages if printed out.
+should conform to the guidance in AIP-8. Most AIPs **should** be no more than
+two pages if printed out.
 
 If the technical steering committee has suggested an AIP number, use that;
 otherwise use 99 (and expect to change it during the course of the review).
@@ -174,7 +189,7 @@ in review.
 To gain final approval, an AIP **must** be approved by, at minimum, two members
 of the technical steering committee. Additionally, there **should not** be any
 committee members requesting significant changes (indicated by the use of the
-"changes requested" feature on GitHub).)
+"changes requested" feature on GitHub).
 
 **Note:** If an AIP editor is the primary author of an AIP, then at least two
 _other_ editors must approve it.
@@ -194,11 +209,13 @@ state accordingly and submit the PR.
 ### Replacing an AIP
 
 In rare cases, it may be necessary to replace an AIP with another one. This is
-not general practice: minor edits to approved AIPs are acceptable, and will be
-the common way to tweak guidance. However, if new guidance fundamentally alters
-the old guidance in some way, then the technical steering committee **should**
-create a new AIP that, once approved, will replace the old one. The old one
-then enters "Replaced" state, and will link to the new, current AIP.
+not general practice: minor edits to approved AIPs are acceptable, and AIPs
+only enter final state when there is high confidence that further edits will
+not be necessary.
 
-[@lukesneeringer]: https://github.com/lukesneeringer
+However, if new guidance fundamentally alters the old guidance in some way,
+then the technical steering committee **should** create a new AIP that, once
+approved, will replace the old one. The old one then enters "Replaced" state,
+and will link to the new, current AIP.
+
 [aip.dev]: https://aip.dev/
