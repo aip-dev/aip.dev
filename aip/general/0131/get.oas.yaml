@@ -4,7 +4,7 @@ info:
   title: Library
   version: 1.0.0
 paths:
-  /publishers/{publisherId}/books/{id}:
+  /publishers/{publisherId}/books/{bookId}:
     get:
       operationId: getBook
       description: Get a single book.
