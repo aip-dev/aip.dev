@@ -10,9 +10,11 @@ resource URI, which returns the resource itself.
 ## Guidance
 
 APIs **should** generally provide a `GET` method for resources unless it is not
-valuable for users to do so. When the `GET` method is used on a URI ending in a resource ID or resource ID alias, the result should be a
-single resource.
-For more information about using the `GET` method on a URI ending with a resource collection identifier, see AIP-132.
+valuable for users to do so. When the `GET` method is used on a URI ending in a
+resource ID or resource ID alias, the result should be a single resource. For
+more information about using the `GET` method on a URI ending with a resource
+collection identifier, see AIP-132.
+
 ### Requests
 
 Single-resource `GET` operations **must** be made by sending a `GET` request to
@@ -116,8 +118,9 @@ metadata:
     there is a reason to return a partial response (see AIP-157).
 - The URI **should** contain a variable for each individual ID in the resource
   hierarchy.
-  - The path parameter for all resource IDs must be in the form `{resourceName}Id`, i.e. `bookId`.
-    representing the ID of parent resources **must** end with `Id`.
+  - The path parameter for all resource IDs must be in the form
+    `{resourceName}Id`, i.e. `bookId`. representing the ID of parent resources
+    **must** end with `Id`.
 
 {% endtabs %}
 
