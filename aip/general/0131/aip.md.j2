@@ -118,9 +118,9 @@ metadata:
     there is a reason to return a partial response (see AIP-157).
 - The URI **should** contain a variable for each individual ID in the resource
   hierarchy.
-  - The path parameter for all resource IDs must be in the form
-    `{resourceName}Id`, i.e. `bookId`. representing the ID of parent resources
-    **must** end with `Id`.
+  - The path parameter for all resource IDs **must** be in the form
+    `{resourceName}Id` (such as `bookId`), and path parameters representing the
+    ID of parent resources **must** end with `Id`.
 
 {% endtabs %}
 
