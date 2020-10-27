@@ -52,9 +52,13 @@ any additional wrapping:
 
 ### Errors
 
-If the user does not have permission to access the resource, regardless of
-whether or not it exists, the service **must** reply with an HTTP 403 error.
-Permission **must** be checked prior to checking if the resource exists.
+If the user does not have sufficient permission to know that the resource
+exists, the service **should** reply with an HTTP 404 error, regardless of
+whether or not the resource exists. Permission **must** be checked prior to
+checking if the resource exists.
+
+If the user has sufficient permission to know that the resource exists, but is
+unable to access it, the service **should** reply with an HTTP 403 error.
 
 If the user does have proper permission, but the requested resource does not
 exist, the service **must** reply with an HTTP 404 error.
@@ -123,13 +127,3 @@ metadata:
     ID of parent resources **must** end with `Id`.
 
 {% endtabs %}
-
-## Changelog
-
-- **2020-06-08**: Added guidance on returning the full resource.
-- **2019-10-18**: Added guidance on annotations.
-- **2019-08-12**: Added guidance for error cases.
-- **2019-08-01**: Changed the examples from "shelves" to "publishers", to
-  present a better example of resource ownership.
-- **2019-05-29**: Added an explicit prohibition on arbitrary fields in standard
-  operations.
