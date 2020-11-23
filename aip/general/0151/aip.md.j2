@@ -127,19 +127,7 @@ canonical error object.
 When using protocol buffers, the well-known type `google.longrunning.Operation`
 is used:
 
-```proto
-// Write a book.
-rpc WriteBook(WriteBookRequest) returns (google.longrunning.Operation) {
-  option (google.api.http) = {
-    post: "/v1/{parent=publishers/*}/books}:write"
-    body: "*"
-  };
-  option (google.longrunning.operation_info) = {
-    response_type: "WriteBookResponse"
-    metadata_type: "WriteBookMetadata"
-  };
-}
-```
+{% sample 'lro.proto', 'rpc WriteBook' %}
 
 - The response type **must** be `google.longrunning.Operation`. The `Operation`
   proto definition **must not** be copied into individual APIs.
@@ -162,6 +150,10 @@ rpc WriteBook(WriteBookRequest) returns (google.longrunning.Operation) {
 - APIs with messages that return `Operation` **must** implement the
   [`Operations`][lro] service. Individual APIs **must not** define their own
   interfaces for long-running operations to avoid inconsistency. {% endtabs %}
+
+{% tab oas %}
+
+{% endtabs %}
 
 <!-- prettier-ignore-start -->
 [google.rpc.Status]: https://github.com/googleapis/api-common-protos/blob/master/google/rpc/S.proto
