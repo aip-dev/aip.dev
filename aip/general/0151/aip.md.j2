@@ -31,8 +31,8 @@ amount of time" depending on what work is being done. A good rule of thumb is
 Long-running requests **should** use a common format:
 
 ```typescript
-interface Promise {
-  // The identifier for this promise.
+interface StatusMonitor {
+  // The identifier for this status monitor.
   id: string;
 
   // Whether the request is done.
@@ -66,23 +66,23 @@ interface Promise {
     custom-defined empty struct rather than a common void or empty type, to
     permit future extensibility.
 
-### Querying an promise
+### Querying a status monitor
 
 The service **must** provide an endpoint to query the status of the operation,
 which **must** accept the operation identifier and **should not** include other
 parameters:
 
 ```http
-GET /v1/promises/{promise} HTTP/2
+GET /v1/statusMonitors/{status_monitor} HTTP/2
 Host: library.googleapis.com
 Accept: application/json
 ```
 
-The endpoint **must** return a `Promise` as described above.
+The endpoint **must** return a `StatusMonitor` as described above.
 
 ### Standard methods
 
-APIs **may** return an `Promise` from the [`Create`][aip-133],
+APIs **may** return an `StatusMonitor` from the [`Create`][aip-133],
 [`Update`][aip-134], or [`Delete`][aip-135] standard methods if appropriate. In
 this case, the `response` field **must** be the standard and expected response
 type for that standard method.
@@ -106,10 +106,10 @@ but is not obligated to do so:
 
 ### Expiration
 
-APIs **may** allow their promise resources to expire after sufficient time has
-elapsed after the request completed.
+APIs **may** allow their status monitor resources to expire after sufficient
+time has elapsed after the request completed.
 
-**Note:** A good rule of thumb for promise expiry is 30 days.
+**Note:** A good rule of thumb for status monitor expiry is 30 days.
 
 ### Errors
 
@@ -128,7 +128,7 @@ When using protocol buffers, the well-known type `google.longrunning.Operation`
 is used.
 
 **Note:** For historical reasons, Google uses the term `Operation` to represent
-what this document describes as a `Promise`.
+what this document describes as a `StatusMonitor`.
 
 {% sample 'lro.proto', 'rpc WriteBook' %}
 
