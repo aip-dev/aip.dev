@@ -154,6 +154,40 @@ what this document describes as a `StatusMonitor`.
   [`Operations`][lro] service. Individual APIs **must not** define their own
   interfaces for long-running operations to avoid inconsistency.
 
+{% tab oas %}
+
+{% sample 'lro.oas.yaml', 'paths' %}
+
+- The response body schema **must** be an object with ``
+  - `name` (or `id`): the server-assigned name or id for the operation,
+    which is only unique within the same service that originally returns it.
+  - `done`: a boolean that indicates if the operation has completed (`true`)
+    or is still in progress (`false`).
+  - `result`: an object field that contains either the result of operation or
+    error information when the operation has completed, and otherwise is empty.
+- The response may contain additional properties containing service-specific
+  metadata associated with the operation, for example progress information and
+  common metadata such as create time.
+- The method **must** include a `google.longrunning.operation_info` annotation,
+  which **must** define both response and metadata types.
+  - The response and metadata types **must** be defined in the file where the
+    RPC appears, or a file imported by that file.
+  - If the response and metadata types are defined in another package, the
+    fully-qualified message name **must** be used.
+  - The response type **should not** be `google.protobuf.Empty` (except for
+    [`Delete`][aip-135] methods), unless it is certain that response data will
+    _never_ be needed. If response data might be added in the future, define an
+    empty message for the RPC response and use that.
+  - The metadata type is used to provide information such as progress, partial
+    failures, and similar information on each `GetOperation` call. The metadata
+    type **should not** be `google.protobuf.Empty`, unless it is certain that
+    metadata will _never_ be needed. If metadata might be added in the future,
+    define an empty message for the RPC metadata and use that.
+- APIs with messages that return `Operation` **must** implement the
+  [`Operations`][lro] service. Individual APIs **must not** define their own
+  interfaces for long-running operations to avoid inconsistency.
+
+
 {% endtabs %}
 
 <!-- prettier-ignore-start -->
