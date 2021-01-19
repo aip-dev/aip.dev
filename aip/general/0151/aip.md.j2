@@ -1,6 +1,6 @@
 # Long-running requests
 
-Occasionally, an service may need to expose an operation that takes a
+Occasionally, a service may need to expose an operation that takes a
 significant amount of time to complete. In these situations, it is often a poor
 user experience to simply block while the task runs; rather, it is better to
 return some kind of promise to the user, and allow the user to check back in
@@ -28,7 +28,8 @@ amount of time" depending on what work is being done. A good rule of thumb is
 
 ### Status monitor representation
 
-Long-running requests **should** use a common format:
+The response to a long-running request **should** be a "status monitor" having
+the following common format:
 
 ```typescript
 interface StatusMonitor {
@@ -158,35 +159,23 @@ what this document describes as a `StatusMonitor`.
 
 {% sample 'lro.oas.yaml', 'paths' %}
 
-- The response body schema **must** be an object with ``
-  - `name` (or `id`): the server-assigned name or id for the operation,
-    which is only unique within the same service that originally returns it.
-  - `done`: a boolean that indicates if the operation has completed (`true`)
-    or is still in progress (`false`).
-  - `result`: an object field that contains either the result of operation or
-    error information when the operation has completed, and otherwise is empty.
-- The response may contain additional properties containing service-specific
+- `202` **must** be the only success status code defined.
+- The `202` response **must** define an `application/json` response body and no other
+  response content types.
+- The response body schema **must** be an object with `name`, `done`, and `result`
+  properties as described above for a StatusMonitor
+- The response body schema **may** contain additional properties to hold service-specific
   metadata associated with the operation, for example progress information and
   common metadata such as create time.
-- The method **must** include a `google.longrunning.operation_info` annotation,
-  which **must** define both response and metadata types.
-  - The response and metadata types **must** be defined in the file where the
-    RPC appears, or a file imported by that file.
-  - If the response and metadata types are defined in another package, the
-    fully-qualified message name **must** be used.
-  - The response type **should not** be `google.protobuf.Empty` (except for
-    [`Delete`][aip-135] methods), unless it is certain that response data will
-    _never_ be needed. If response data might be added in the future, define an
-    empty message for the RPC response and use that.
-  - The metadata type is used to provide information such as progress, partial
-    failures, and similar information on each `GetOperation` call. The metadata
-    type **should not** be `google.protobuf.Empty`, unless it is certain that
-    metadata will _never_ be needed. If metadata might be added in the future,
-    define an empty message for the RPC metadata and use that.
-- APIs with messages that return `Operation` **must** implement the
-  [`Operations`][lro] service. Individual APIs **must not** define their own
-  interfaces for long-running operations to avoid inconsistency.
-
+- The `response` property of `result` **must** be a schema that defines the success
+  response for the operation. For an operation that typically gives a `204 No Content`
+  response, such as a `Delete`, `response` should be defined as an empty object schema.
+  For a standard `Get/Create/Update` operation, `response` should be a representation
+  of the resource.
+- If a service has any long running operations, the service **must** define an
+  `StatusMonitor` resource with a `list` operation to retrieve a potentially filtered
+  list of status monitors and a `get` operation to retrieve a specific status monitor
+  by its `name`.
 
 {% endtabs %}
 
