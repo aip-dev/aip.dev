@@ -104,10 +104,9 @@ request message **should** contain a `string order_by` field.
 - Values **should** be a comma separated list of fields. For example:
   `"foo,bar"`.
 - The default sorting order is ascending. To specify descending order for a
-  field, users append a `" desc"` suffix; for example: `"foo desc, bar"`.
-- Redundant space characters in the syntax are insignificant.
-  `"foo, bar desc"`, `" foo , bar desc "`, and `"foo,bar desc"` are all
-  equivalent.
+  field, users append a `-` prefix; for example: `"foo,-bar"`, `"-foo,bar"`.
+- Redundant space characters in the syntax are insignificant. `"foo, -bar"`,
+  `" foo , -bar "`, and `"foo,-bar"` are all equivalent.
 - Subfields are specified with a `.` character, such as `foo.bar` or
   `address.street`.
 
@@ -191,7 +190,7 @@ when the REST/JSON interface is used.
 Collection `GET` operations **must** be specified with consistent OpenAPI
 metadata:
 
-{% sample 'get.oas.yaml', 'paths' %}
+{% sample 'list.oas.yaml', 'paths' %}
 
 - The `operationId` **must** begin with the word `list`. The remainder of the
   `operationId` **should** be the plural form of the resource type's name.
