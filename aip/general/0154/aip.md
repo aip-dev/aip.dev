@@ -43,7 +43,7 @@ service **must** reply with an HTTP 412 error.
 If the user omits the `If-Match` header, the service **should** permit the
 request. However, services with strong consistency or parallelism requirements
 **may** require users to send ETags all the time and reject the request with an
-HTTP 400 error if it does not contain an etag.
+HTTP 400 error if it does not contain an ETag.
 
 If any conditional headers are supported for any operation within a service,
 the same conditional headers **must** be supported for all mutation methods
