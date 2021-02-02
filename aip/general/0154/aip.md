@@ -22,11 +22,18 @@ Content-type: application/json
 ETag: "55cc0347-66fc-46c3-a26f-98a9a7d61d0e"
 ```
 
-The etag field **must** be provided by the server on output, and values
-**should** conform to [RFC 7232][].
+The etag **must** be provided by the server on output, and values **should**
+conform to [RFC 7232][]. Resources **must** support the `If-Match` header (and
+**may** support the `If-None-Match` header) if and only if resources provide
+the etag.
 
 **Note:** ETag values **should** include quotes as described in [RFC 7232][].
 For example, a valid etag is `"foo"`, not `foo`.
+
+Etags **must** be based on a checksum or hash of the resource that guarantees
+it will change if the resource changes.
+
+### Condition headers
 
 If the service receives a request to modify a resource that includes an
 `If-Match` header, the service **must** validate that the value matches the
@@ -37,6 +44,16 @@ If the user omits the `If-Match` header, the service **should** permit the
 request. However, services with strong consistency or parallelism requirements
 **may** require users to send etags all the time and reject the request with an
 HTTP 400 error in this case.
+
+If any conditional headers are supported for any operation within a service,
+the same conditional headers **must** be supported for all mutation methods
+(`POST`, `PATCH`, `PUT`, and `DELETE`) of any path that supports them, and
+**should** be supported uniformly for all operations across the service.
+
+If any validator or conditional headers are supported for any operations in the
+service, the use of unsupported conditional headers **must** result in an
+error. (In other words, once a service gives the client reason to believe it
+understands conditional headers, it **must not** ever ignore them.)
 
 ### Strong and weak etags
 
@@ -57,6 +74,9 @@ prefix as mandated by [RFC 7232][]:
 Content-type: application/json
 ETag: W/"55cc0347-66fc-46c3-a26f-98a9a7d61d0e"
 ```
+
+Stronng ETags **must** and weak ETags **should** be guarannteed to change if
+any properties on the resource change that are directly mutable by the client.
 
 ## Further reading
 
