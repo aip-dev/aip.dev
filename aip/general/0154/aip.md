@@ -27,8 +27,8 @@ conform to [RFC 7232][]. Resources **must** support the `If-Match` header (and
 **may** support the `If-None-Match` header) if and only if resources provide
 the etag.
 
-**Note:** ETag values **should** include quotes as described in [RFC 7232][].
-For example, a valid etag is `"foo"`, not `foo`.
+**Note:** ETag values **must** include quotes as described in [RFC 7232][]. For
+example, a valid etag is `"foo"`, not `foo`.
 
 Etags **must** be based on a checksum or hash of the resource that guarantees
 it will change if the resource changes.
@@ -85,8 +85,8 @@ Content-type: application/json
 ETag: W/"55cc0347-66fc-46c3-a26f-98a9a7d61d0e"
 ```
 
-Stronng ETags **must** and weak ETags **should** be guarannteed to change if
-any properties on the resource change that are directly mutable by the client.
+Strong ETags **must** and weak ETags **should** be guaranteed to change if any
+properties on the resource change that are directly mutable by the client.
 
 ## Further reading
 
