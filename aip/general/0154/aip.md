@@ -55,6 +55,16 @@ service, the use of unsupported conditional headers **must** result in an
 error. (In other words, once a service gives the client reason to believe it
 understands conditional headers, it **must not** ever ignore them.)
 
+### Read requests
+
+If a service receives a `GET` or `HEAD` request with an `If-Match` header, the
+service **must** proceed with the request if the etag matches, or send a
+`412 Precondition Failed` error if the etag does not match.
+
+If a service receives a `GET` or `HEAD` request with an `If-None-Match` header,
+the service **must** proceed with the request if the etag does not match, or
+return a `304 Not Modified` response if the etag does match.
+
 ### Strong and weak etags
 
 ETags can be either "strongly validated" or "weakly validated":
