@@ -22,27 +22,27 @@ Content-type: application/json
 ETag: "55cc0347-66fc-46c3-a26f-98a9a7d61d0e"
 ```
 
-The etag **must** be provided by the server on output, and values **should**
+The ETag **must** be provided by the server on output, and values **should**
 conform to [RFC 7232][]. Resources **must** support the `If-Match` header (and
 **may** support the `If-None-Match` header) if and only if resources provide
-the etag.
+the ETag.
 
 **Note:** ETag values **must** include quotes as described in [RFC 7232][]. For
-example, a valid etag is `"foo"`, not `foo`.
+example, a valid ETag is `"foo"`, not `foo`.
 
-Etags **must** be based on a checksum or hash of the resource that guarantees
+ETags **must** be based on a checksum or hash of the resource that guarantees
 it will change if the resource changes.
 
 ### Condition headers
 
 If the service receives a request to modify a resource that includes an
 `If-Match` header, the service **must** validate that the value matches the
-current etag. If the `If-Match` header value does not match the etag, the
+current ETag. If the `If-Match` header value does not match the ETag, the
 service **must** reply with an HTTP 412 error.
 
 If the user omits the `If-Match` header, the service **should** permit the
 request. However, services with strong consistency or parallelism requirements
-**may** require users to send etags all the time and reject the request with an
+**may** require users to send ETags all the time and reject the request with an
 HTTP 400 error in this case.
 
 If any conditional headers are supported for any operation within a service,
@@ -58,25 +58,25 @@ understands conditional headers, it **must not** ever ignore them.)
 ### Read requests
 
 If a service receives a `GET` or `HEAD` request with an `If-Match` header, the
-service **must** proceed with the request if the etag matches, or send a
-`412 Precondition Failed` error if the etag does not match.
+service **must** proceed with the request if the ETag matches, or send a
+`412 Precondition Failed` error if the ETag does not match.
 
 If a service receives a `GET` or `HEAD` request with an `If-None-Match` header,
-the service **must** proceed with the request if the etag does not match, or
-return a `304 Not Modified` response if the etag does match.
+the service **must** proceed with the request if the ETag does not match, or
+return a `304 Not Modified` response if the ETag does match.
 
-### Strong and weak etags
+### Strong and weak ETags
 
 ETags can be either "strongly validated" or "weakly validated":
 
-- A strongly validated etag means that two resources bearing the same etag are
+- A strongly validated ETag means that two resources bearing the same ETag are
   byte-for-byte identical.
-- A weakly validated etag means that two resources bearing the same etag are
+- A weakly validated ETag means that two resources bearing the same ETag are
   equivalent, but may differ in ways that the service does not consider to be
   important.
 
-Resources **may** use either strong or weak etags, as it sees fit, but
-**should** document the behavior. Additionally, weak etags **must** have a `W/`
+Resources **may** use either strong or weak ETags, as it sees fit, but
+**should** document the behavior. Additionally, weak ETags **must** have a `W/`
 prefix as mandated by [RFC 7232][]:
 
 ```
@@ -95,8 +95,8 @@ properties on the resource change that are directly mutable by the client.
 ## Changelog
 
 - **2020-09-02**: Clarified that other errors may take precedence over
-  `FAILED_PRECONDITION` for etag mismatches.
-- **2020-09-02**: Add guidance for etags on request messages.
+  `FAILED_PRECONDITION` for ETag mismatches.
+- **2020-09-02**: Add guidance for ETags on request messages.
 - **2019-09-23**: Changed the title to "resource freshness validation".
 
 [rfc 7232]: https://tools.ietf.org/html/rfc7232#section-2.3
