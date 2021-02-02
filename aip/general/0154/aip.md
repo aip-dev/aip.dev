@@ -12,7 +12,7 @@ the request.
 
 ## Guidance
 
-A resource **may** provide an `etag` header when retrieving a single resource
+A resource **may** provide an `ETag` header when retrieving a single resource
 when it is important to ensure that the client has an up to date resource
 before acting on certain requests:
 
