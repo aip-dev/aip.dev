@@ -30,8 +30,8 @@ the ETag.
 **Note:** ETag values **must** include quotes as described in [RFC 7232][]. For
 example, a valid ETag is `"foo"`, not `foo`.
 
-ETags **must** be based on a checksum or hash of the resource that guarantees
-it will change if the resource changes.
+ETags **must** be based on an opaque checksum or hash of the resource that
+guarantees it will change if the resource changes.
 
 ### Condition headers
 
