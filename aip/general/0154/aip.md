@@ -87,6 +87,9 @@ ETag: W/"55cc0347-66fc-46c3-a26f-98a9a7d61d0e"
 
 Strong ETags **must** and weak ETags **should** be guaranteed to change if any
 properties on the resource change that are directly mutable by the client.
+Additionally, strong ETags **should** be guaranteed to change if the resource's
+representation changes in a meaningful way (meaning the new representation is
+not equivalent to the old one).
 
 ## Further reading
 
