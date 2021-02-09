@@ -164,10 +164,12 @@ what this document describes as a `StatusMonitor`.
   response content types.
 - The response body schema **must** be an object with `name`, `done`, and `result`
   properties as described above for a StatusMonitor
-- The response body schema **may** contain additional properties to hold service-specific
-  metadata associated with the operation, for example progress information and
-  common metadata such as create time.
-- The `response` property of `result` **must** be a schema that defines the success
+- The response body schema **may** contain an object property named `metadata` to
+  hold service-specific metadata associated with the operation, for example progress
+  information and common metadata such as create time.  The service **should** define
+  the contents of the `metadata` object in a separate schema, which **should** specify
+  `additionalProperties: true` to allow for future extensibility.
+- The `response` property **must** be a schema that defines the success
   response for the operation. For an operation that typically gives a `204 No Content`
   response, such as a `Delete`, `response` should be defined as an empty object schema.
   For a standard `Get/Create/Update` operation, `response` should be a representation

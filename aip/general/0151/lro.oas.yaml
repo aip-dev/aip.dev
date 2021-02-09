@@ -1,4 +1,3 @@
----
 openapi: 3.0.3
 info:
   title: Library
@@ -6,20 +5,20 @@ info:
 paths:
   /v1/resources:
     post:
-      operationId: create_resource
-      description: Create a resource.
+      operationId: write_book
+      description: Write a book.
       responses:
         202:
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceStatus'
+                $ref: '#/components/schemas/WriteBookStatus'
 
 components:
   schemas:
-    ResourceStatus:
-      description: The status of a create_resource operation
+    StatusMonitor:
+      description: The status of a long running operation.
       properties:
         name:
           type: string
@@ -28,26 +27,39 @@ components:
           type: boolean
           description: >-
             If the value is false, it means the operation is still in progress. If true, the operation is completed,
-            and either error or response is available.
-        result:
-          description: >-
-            The operation result, which can be either an error or a valid response. If done == false, neither error
-            nor response is set. If done == true, exactly one of error or response is set.
-          oneOf:
-            - type: object
-              properties:
-                error:
-                  $ref: '#/components/schemas/Error'
-            - type: object
-              properties:
-                response:
-                  $ref: '#/components/schemas/Resource'
+            and either response or error is available.
+        error:
+          $ref: '#/components/schemas/Error'
       required:
         - name
         - done
-        - result
-      additionalProperties:
-        description: >-
-          Service-specific metadata associated with the operation. It typically contains progress information
-          and common metadata such as create time. Some services might not provide such metadata. Any method that
-          returns a long-running operation should document the additional properties that may be returned.
+
+    WriteBookStatus:
+      description: The status of a write_book operation.
+      allOf:
+        - $ref: '#/components/schemas/StatusMonitor'
+        - type: object
+          properties:
+            response:
+              type: string
+              description: The text that was written.
+            metadata:
+              type: object
+              properties:
+                start_time:
+                  type: string
+                  format: date-time
+                  description: The time the operation started.
+                progress_percent:
+                  type: integer
+                  format: int32
+                  description: The current progress, expressed as an integer.
+                state:
+                  type: string
+                  description: The current state of the operation.
+                  enum:
+                    - STATE_UNSPECIFIED
+                    - RUNNING
+                    - CANCELLING
+                    - CANCELLED
+                    - FAILED
