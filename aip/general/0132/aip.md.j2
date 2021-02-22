@@ -42,7 +42,7 @@ individual result being a resource:
 
 ```json
 {
-  "results": [
+  "books": [
     {
       "name": "publishers/lacroix/books/les-mis",
       "isbn": "978-037-540317-0",
@@ -62,8 +62,8 @@ individual result being a resource:
 }
 ```
 
-- The array of resources **must** be named `results`, and contain resources
-  with no additional wrapping.
+- The array of resources **must** be named using the English plural term for
+  the resource, and contain resources with no additional wrapping.
 - The `string next_page_token` field **must** be included in the list response
   struct. It **must** be set if there are subsequent pages, and **must not** be
   set if the response represents the final page. For more information, see
@@ -94,7 +94,7 @@ exist (generally because the parent does not exist), the service **must** reply
 with an HTTP 404 error.
 
 **Note:** An empty collection which the user has permission to access **must**
-return `200 OK` with an empty `results` array, and not `404 Not Found`.
+return `200 OK` with an empty results array, and not `404 Not Found`.
 
 ### Ordering
 
@@ -178,9 +178,9 @@ when the REST/JSON interface is used.
 
 {% sample 'list.proto', 'message ListBooksResponse' %}
 
-- The response message **must** include a `results` field corresponding to the
-  resources being returned, and **should not** include any other repeated
-  fields.
+- The response message **must** include a field corresponding to the resources
+  being returned, named for the English plural term for the resource, and
+  **should not** include any other repeated fields.
 - Fields providing metadata about the list request (such as
   `string next_page_token` or `int32 total_size`) **must** be included on the
   response message (not as part of the resource itself).
