@@ -8,9 +8,9 @@ collections be paginated.
 
 ## Guidance
 
-RPCs returning collections of data **must** provide pagination _at the outset_,
-as it is a [backwards-incompatible change](#backwards-compatibility) to add
-pagination to an existing method.
+Operations returning collections of data **must** provide pagination _at the
+outset_, as it is a [backwards-incompatible change](#backwards-compatibility)
+to add pagination to an existing method.
 
 ```typescript
 // The request structure for listing books.
@@ -59,9 +59,9 @@ interface ListBooksResponse {
   field, allowing users to advance to the next page in the collection.
   - If the user changes the `max_page_size` in a request for subsequent pages,
     the service **must** honor the new page size.
-  - The user is expected to keep all other arguments to the operation request the same; if
-    any arguments are different, the API **should** send a `400 Bad Request`
-    error.
+  - The user is expected to keep all other arguments to the operation request
+    the same; if any arguments are different, the API **should** send a
+    `400 Bad Request` error.
 - The response **must not** be a streaming response.
 - Response messages for collections **should** define a
   `string next_page_token` field, providing the user with a page token that may
@@ -113,8 +113,8 @@ thumb is three days.
 
 ## Backwards compatibility
 
-Adding pagination to an existing RPC is a backwards-incompatible change. This
-may seem strange; adding fields to proto messages is generally backwards
+Adding pagination to an existing operation is a backwards-incompatible change.
+This may seem strange; adding fields to proto messages is generally backwards
 compatible. However, this change is _behaviorally_ incompatible.
 
 Consider a user whose collection has 75 resources, and who has already written
@@ -124,9 +124,9 @@ now is only getting the first 50 (and does not know to advance pagination).
 Even if the API set a higher default limit, such as 100, the user's collection
 could grow, and _then_ the code would break.
 
-For this reason, it is important to always add pagination to RPCs returning
-collections _up front_; they are consistently important, and they can not be
-added later without causing problems for existing users.
+For this reason, it is important to always add pagination to operations
+returning collections _up front_; they are consistently important, and they can
+not be added later without causing problems for existing users.
 
 **Warning:** This also entails that, in addition to presenting the pagination
 fields, they **must** be _actually implemented_ with a non-infinite default
