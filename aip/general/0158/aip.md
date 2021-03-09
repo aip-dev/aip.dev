@@ -63,6 +63,8 @@ interface ListBooksResponse {
     the same; if any arguments are different, the API **should** send a
     `400 Bad Request` error.
 - The response **must not** be a streaming response.
+- Services **may** support using page tokens across versions of a service, but
+  are not required to do so.
 - Response messages for collections **should** define a
   `string next_page_token` field, providing the user with a page token that may
   be used to retrieve the next page.
