@@ -59,7 +59,7 @@ interface ListBooksResponse {
   field, allowing users to advance to the next page in the collection.
   - If the user changes the `max_page_size` in a request for subsequent pages,
     the service **must** honor the new page size.
-  - The user is expected to keep all other arguments to the RPC the same; if
+  - The user is expected to keep all other arguments to the operation request the same; if
     any arguments are different, the API **should** send a `400 Bad Request`
     error.
 - The response **must not** be a streaming response.
