@@ -76,12 +76,14 @@ interface ListBooksResponse {
     "end-of-collection" to users.
   - If the end of the collection has not been reached (or if the API can not
     determine in time), the API **must** provide a `next_page_token`.
-- Response messages **may** define a `next_page_url` field, containing the full
-  URL for the user to get the next page.
+- Response messages **may** include a `Link` header (see [RFC-8288][]) with the
+  full URL for the next page, with a `rel` value of `next-page`.
 - Response messages for collections **may** provide an `int32 total_size`
   field, providing the user with the total number of items in the list.
   - This total **may** be an estimate (but the API **should** explicitly
     document that).
+
+[rfc-8288]: https://tools.ietf.org/html/rfc8288
 
 ### Opacity
 
