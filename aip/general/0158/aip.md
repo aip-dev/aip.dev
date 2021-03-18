@@ -51,11 +51,16 @@ interface ListBooksResponse {
     chooses an appropriate default, which the API **should** document. The API
     **must not** return an error.
   - If the user specifies `max_page_size` greater than the maximum permitted by
-    the API, the API **should** coerce down to the maximum permitted page size.
+    the service, the service **should** coerce down to the maximum permitted
+    page size.
   - If the user specifies a negative value for `max_page_size`, the API
     **must** return a `400 Bad Request` error.
-  - The API **may** return fewer results than the number requested (including
-    zero results), even if not at the end of the collection.
+  - The service **should** the number of results requested, unless the end of
+    the collection is reached.
+    - However, occasionally this is infeasible, especially within expected time
+      limits. In these cases, the service **may** return fewer results than the
+      number requested (including zero results), even if not at the end of the
+      collection.
 - Request definitions for collections **should** define a `string page_token`
   field, allowing users to advance to the next page in the collection.
   - If the user changes the `max_page_size` in a request for subsequent pages,
@@ -76,7 +81,7 @@ interface ListBooksResponse {
     **must** be empty. This is the _only_ way to communicate
     "end-of-collection" to users.
   - If the end of the collection has not been reached (or if the API can not
-    determine in time), the API **must** provide a `next_page_token`.
+    determine in time), the service **must** provide a `next_page_token`.
 - Response definitions **may** include a `string next_page_url` field
   containing the full URL for the next page.
 - Response definitions for collections **may** provide an `int32 total_size`
