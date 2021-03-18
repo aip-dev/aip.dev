@@ -86,6 +86,26 @@ interface ListBooksResponse {
 
 [rfc-8288]: https://tools.ietf.org/html/rfc8288
 
+### Skipping results
+
+The request definition for a paginatied operation **may** define an
+`int32 skip` field to allow the user to skip results.
+
+The `skip` value **must** refer to the number of individual resources to skip,
+not the number of pages.
+
+For example:
+
+- A request with no page token and a `skip` value of `30` returns a single page
+  of results starting with the 31st result.
+- A request with a page token corresponding to the 51st result (because the
+  first 50 results were returned on the first page) and a `skip` value of `30`
+  returns a single page of results starting with the 81st result.
+
+If a `skip` value is provided that causes the cursor to move past the end of
+the collection of results, the response **must** be `200 OK` with an empty
+result set and an empty `next_page_token`.
+
 ### Opacity
 
 Page tokens provided by services **must** be opaque (but URL-safe) strings, and
