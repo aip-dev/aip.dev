@@ -44,8 +44,9 @@ interface ListBooksResponse {
 }
 ```
 
-- Request messages for collections **should** define an `int32 max_page_size`
-  field, allowing users to specify the maximum number of results to return.
+- Request definitions for collections **should** define an
+  `int32 max_page_size` field, allowing users to specify the maximum number of
+  results to return.
   - If the user does not specify `max_page_size` (or specifies `0`), the API
     chooses an appropriate default, which the API **should** document. The API
     **must not** return an error.
@@ -55,7 +56,7 @@ interface ListBooksResponse {
     **must** return a `400 Bad Request` error.
   - The API **may** return fewer results than the number requested (including
     zero results), even if not at the end of the collection.
-- Request messages for collections **should** define a `string page_token`
+- Request definitions for collections **should** define a `string page_token`
   field, allowing users to advance to the next page in the collection.
   - If the user changes the `max_page_size` in a request for subsequent pages,
     the service **must** honor the new page size.
@@ -65,20 +66,20 @@ interface ListBooksResponse {
 - The response **must not** be a streaming response.
 - Services **may** support using page tokens across versions of a service, but
   are not required to do so.
-- Response messages for collections **must** define a `string next_page_token`
-  field, providing the user with a page token that may be used to retrieve the
-  next page.
-  - The field containing pagination results **should** be the first field in
-    the message and have a field number of `1`. It **should** be a repeated
-    field containing a list of resources constituting a single page of results.
+- Response definitions for collections **must** define a
+  `string next_page_token` field, providing the user with a page token that may
+  be used to retrieve the next page.
+  - The field containing pagination results **should** be the first field
+    specified. It **should** be a repeated field containing a list of resources
+    constituting a single page of results.
   - If the end of the collection has been reached, the `next_page_token` field
     **must** be empty. This is the _only_ way to communicate
     "end-of-collection" to users.
   - If the end of the collection has not been reached (or if the API can not
     determine in time), the API **must** provide a `next_page_token`.
-- Response messages **may** include a `Link` header (see [RFC-8288][]) with the
-  full URL for the next page, with a `rel` value of `next-page`.
-- Response messages for collections **may** provide an `int32 total_size`
+- Response definitions **may** include a `string next_page_url` field
+  containing the full URL for the next page.
+- Response definitions for collections **may** provide an `int32 total_size`
   field, providing the user with the total number of items in the list.
   - This total **may** be an estimate (but the API **should** explicitly
     document that).
@@ -131,8 +132,8 @@ exist at the time that pagination begins.
 ## Backwards compatibility
 
 Adding pagination to an existing operation is a backwards-incompatible change.
-This may seem strange; adding fields to proto messages is generally backwards
-compatible. However, this change is _behaviorally_ incompatible.
+This may seem strange; adding fields to interface definitions is generally
+backwards compatible. However, this change is _behaviorally_ incompatible.
 
 Consider a user whose collection has 75 resources, and who has already written
 and deployed code. If the API later adds pagination fields, and sets the
