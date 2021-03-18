@@ -113,6 +113,17 @@ to be used. It is not necessary to document this behavior.
 **Note:** While a reasonable time may vary between services, a good rule of
 thumb is three days.
 
+## Consistency
+
+When discussing pagination, consistency refers to the question of what to do if
+the underlying collection is modified while pagination is in progress. The most
+common way that this occurs is for a resource to be added or deleted in a place
+that the pagination cursor has already passed.
+
+Services **may** choose to be strongly consistent by approximating the
+"repeatable read" behavior in databases, and returning exactly the records that
+exist at the time that pagination begins.
+
 ## Backwards compatibility
 
 Adding pagination to an existing operation is a backwards-incompatible change.
