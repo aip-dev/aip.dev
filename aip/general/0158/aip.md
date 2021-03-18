@@ -65,9 +65,9 @@ interface ListBooksResponse {
 - The response **must not** be a streaming response.
 - Services **may** support using page tokens across versions of a service, but
   are not required to do so.
-- Response messages for collections **should** define a
-  `string next_page_token` field, providing the user with a page token that may
-  be used to retrieve the next page.
+- Response messages for collections **must** define a `string next_page_token`
+  field, providing the user with a page token that may be used to retrieve the
+  next page.
   - The field containing pagination results **should** be the first field in
     the message and have a field number of `1`. It **should** be a repeated
     field containing a list of resources constituting a single page of results.
@@ -76,6 +76,8 @@ interface ListBooksResponse {
     "end-of-collection" to users.
   - If the end of the collection has not been reached (or if the API can not
     determine in time), the API **must** provide a `next_page_token`.
+- Response messages **may** define a `next_page_url` field, containing the full
+  URL for the user to get the next page.
 - Response messages for collections **may** provide an `int32 total_size`
   field, providing the user with the total number of items in the list.
   - This total **may** be an estimate (but the API **should** explicitly
