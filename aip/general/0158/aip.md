@@ -143,7 +143,7 @@ to be used. It is not necessary to document this behavior.
 **Note:** While a reasonable time may vary between services, a good rule of
 thumb is three days.
 
-## Consistency
+### Consistency
 
 When discussing pagination, consistency refers to the question of what to do if
 the underlying collection is modified while pagination is in progress. The most
@@ -154,7 +154,7 @@ Services **may** choose to be strongly consistent by approximating the
 "repeatable read" behavior in databases, and returning exactly the records that
 exist at the time that pagination begins.
 
-## Backwards compatibility
+### Backwards compatibility
 
 Adding pagination to an existing operation is a backwards-incompatible change.
 This may seem strange; adding fields to interface definitions is generally
@@ -175,3 +175,40 @@ not be added later without causing problems for existing users.
 fields, they **must** be _actually implemented_ with a non-infinite default
 value. Implementing an in-memory version (which might fetch everything then
 paginate) is reasonable for initially-small collections.
+
+## Implementation
+
+Page tokens **should** be versioned independently of the public API, so that
+page tokens can be used with any version of the service.
+
+The simplest form of a page token only requires an offset. However, offsets
+pose challenges when a distributed database is introduced, so a more robust
+page token needs to store the information needed to find a "logical" position
+in the database. The simplest way to do this is to include relevant data from
+the last result returned. Primarily, this means the resource ID, but also
+includes any other fields from the resource used to sort the results (for the
+event where the resource is changed or deleted).
+
+This information is from the resource itself, and therefore is sensitive.
+Sensitive data **must** be encrypted before being used in a page token.
+Therefore, the token also includes the date it was created, to allow for the
+potential need to rotate the encryption key.
+
+This yields the following interface, which **may** be base64 encoded and used
+as a page token:
+
+```typescript
+interface PageTokenSecrets {
+  // The ID of the most recent resource returned.
+  lastId: string;
+
+  // Any index data needed, generally 1:1 with the fields used for ordering.
+  indexData: Buffer[];
+
+  // When this token was minted.
+  createTime: Date;
+}
+```
+
+**Note:** This section does not preclude alternative page token implementations
+provided they conform to the guidelines discussed in this document.
