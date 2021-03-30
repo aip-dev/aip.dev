@@ -109,7 +109,7 @@ For example:
 
 If a `skip` value is provided that causes the cursor to move past the end of
 the collection of results, the response **must** be `200 OK` with an empty
-result set and an empty `next_page_token`.
+result set, and not provide a `next_page_token`.
 
 ### Opacity
 
