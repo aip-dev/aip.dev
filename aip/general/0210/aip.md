@@ -69,10 +69,7 @@ typically letters, numbers, hyphens, and underscores
 (`[a-zA-Z][a-zA-Z0-9_-]*`). This ensures that there are never accidental
 collisions due to normalization. If an API decides to allow all valid Unicode
 characters in unique identifiers, the API **must** reject any inputs that are
-not in Normalization Form C. Generally, unique identifiers **should not** start
-with a number as that prefix is reserved for Google-generated identifiers and
-gives us an easy way to check whether we generated a unique numeric ID for or
-whether the ID was chosen by a user.
+not in Normalization Form C.
 
 Unique identifiers **should** use a maximum length of 64 characters, though
 this limit may be expanded as necessary. 64 characters should be sufficient for
@@ -86,10 +83,10 @@ Values **should** always be normalized into Normalization Form C. Unique
 identifiers **must** always be stored in Normalization Form C (see the next
 section).
 
-Imagine we're dealing with Spanish input "estar<b>é</b>" (the accented part
-will be bolded throughout). This text has what we might visualize as 6
-"characters" (in this case, they are grapheme clusters). It has two possible
-Unicode representations:
+Imagine we're dealing with Spanish input "estar<strong>é</strong>" (the
+accented part will be bolded throughout). This text has what we might visualize
+as 6 "characters" (in this case, they are grapheme clusters). It has two
+possible Unicode representations:
 
 - Using 6 code points: `U+0065` `U+0073` `U+0074` `U+0061` `U+0072`
   **`U+00E9`**
