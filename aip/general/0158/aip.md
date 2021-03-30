@@ -189,7 +189,7 @@ the last result returned. Primarily, this means the resource ID, but also
 includes any other fields from the resource used to sort the results (for the
 event where the resource is changed or deleted).
 
-This information is from the resource itself, and therefore is sensitive.
+This information is from the resource itself, and therefore might be sensitive.
 Sensitive data **must** be encrypted before being used in a page token.
 Therefore, the token also includes the date it was created, to allow for the
 potential need to rotate the encryption key.
