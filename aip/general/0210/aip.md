@@ -15,7 +15,7 @@ points", "code units" for a particular encoding (e.g. UTF-8 or UTF-16),
 
 Character encoding tends to be an area we often gloss over, so a quick primer:
 
-- Strings are just bytes that represent numbers according to some encoding
+- Strings are just ordered bytes that represent text according to some encoding
   format.
 - When we talk about **characters**, we sometimes mean Unicode **code points**,
   which are numbers in the Unicode spec (up to 21 bits).
