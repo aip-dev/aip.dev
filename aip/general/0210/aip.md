@@ -85,8 +85,8 @@ section).
 
 Imagine we're dealing with Spanish input "estar<strong>é</strong>" (the
 accented part will be bolded throughout). This text has what we might visualize
-as 6 "characters" (in this case, they are grapheme clusters). It has two
-possible Unicode representations:
+as 6 "characters" (in this case, they are grapheme clusters). There are two
+distinct sequences of Unicode code points that can represent this text:
 
 - Using 6 code points: `U+0065` `U+0073` `U+0074` `U+0061` `U+0072`
   **`U+00E9`**
