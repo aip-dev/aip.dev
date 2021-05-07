@@ -32,12 +32,12 @@ interface Book {
   Instead, the field **should** be a array of strings providing the resource
   names of the associated resources.
 
-**Note:** This document uses the term "array" to refer to the concept of a list
-of elements that have the same type. Some languages and IDLs use other terms,
-such as "list", "repeated", or "sequence", and these terms are all synonymous
-for the purposes of this document. The term "collection" is distinct, and
-refers to a group of resources under a single parent rather than a field on a
-resource.
+**Note:** This document uses the term "array" to refer to a field on a resource
+that is a list of elements that have the same type. Some languages and IDLs use
+other terms, such as "list", "repeated", or "sequence", and these terms are all
+synonymous for the purposes of this document. The term "collection" is
+distinct, and refers to a group of resources under a single parent rather than
+a field on a resource.
 
 ### Scalars and structs
 
@@ -57,19 +57,20 @@ direct update using the [standard `Update`][aip-134] method, or custom `Add`
 and `Remove` methods.
 
 A standard `Update` method has one key limitation: the user is only able to
-update _the entire_ array. This means that the user must read the resource,
-make modifications to the array field value as needed, and send it back. This
-is fine for many situations, particularly when the array field is expected to
-have a small size (fewer than 10 or so) and race conditions are not an issue,
-or can be guarded against with [ETags][aip-154].
+update _the entire_ array. This means that the user is required to read the
+resource, make modifications to the array field value as needed, and send it
+back. This is fine for many situations, particularly when the array field is
+expected to have a small size (fewer than 10 or so) and race conditions are not
+an issue, or can be guarded against with [ETags][aip-154].
 
 **Note:** Declarative-friendly resources (AIP-128) **must** use the standard
 `Update` method, and not introduce `Add` and `Remove` methods. If declarative
 tools need to reason about particular relationships while ignoring others,
 consider using a subresource instead.
 
-If atomic modifications are required, the API **should** define custom methods
-using the verbs `Add` and `Remove`:
+If atomic modifications are required, and if the array is functionally a set
+(meaning that order does not matter and duplicate values are not meaningful),
+the API **should** define custom methods using the verbs `Add` and `Remove`:
 
 {% tab proto %}
 
@@ -92,9 +93,11 @@ using the verbs `Add` and `Remove`:
   - That variable **should** be the only variable in the URI path.
 - The body clause in the `google.api.http` annotation **should** be `"*"`.
 - If the data being added in an `Add` operation is already present, the method
-  **should** error with `ALREADY_EXISTS`, but **may** no-op if appropriate..
+  **should** accept the request and make no changes (no-op), but **may** error
+  with `ALREADY_EXISTS` if appropriate.
 - If the data being removed in a `Remove` operation is not present, the method
-  **should** error with `NOT_FOUND`, but **may** no-op if appropriate.
+  **should** accept the request and make no changes (no-op), but **may** error
+  with `NOT_FOUND` if appropriate.
 
 {% tab oas %}
 
@@ -113,9 +116,11 @@ using the verbs `Add` and `Remove`:
 - The HTTP URI **must** end with `:add*` or `:remove*`, where `*` is the
   camel-case singular name of the field being added or removed.
 - If the data being added in an `Add` operation is already present, the method
-  **should** error with `409 Conflict`, but **may** no-op if appropriate..
+  **should** accept the request and make no changes (no-op), but **may** error
+  with `409 Conflict` if appropriate.
 - If the data being removed in a `Remove` operation is not present, the method
-  **should** error with `404 Not Found`, but **may** no-op if appropriate.
+  **should** accept the request and make no changes (no-op), but **may** error
+  with `404 Not Found` if appropriate.
 
 {% endtabs %}
 
