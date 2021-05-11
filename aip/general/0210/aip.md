@@ -19,11 +19,10 @@ Character encoding tends to be an area we often gloss over, so a quick primer:
   format.
 - When we talk about **characters**, we sometimes mean Unicode **code points**,
   which are 21-bit unsigned integers `0` through `0x10FFFF`.
-- Other times we might mean **graphemes** or **grapheme clusters**, which may
-  have multiple numeric representations and may be represented by more than one
-  code point. For example, `á` may be represented as a composition of
-  `U+0061 + U+0301` (the `a` + the accent combining mark) or as a single code
-  point, `U+00E1`.
+- Other times we might mean **grapheme clusters**, which are _perceived_ as single
+  characters but may be composed of multiple code points. For example, `á` can be
+  represented as the single code point `U+00E1` or as a sequence of `U+0061` followed
+  by `U+0301` (the letter `a`, then a combining acute accent).
 - Protocol buffers uses **UTF-8** ("Unicode Transformation Format") which is a
   variable-length encoding scheme using up to 4 **code units** (8-bit bytes)
   per code point.
