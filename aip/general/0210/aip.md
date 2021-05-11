@@ -15,17 +15,18 @@ measured in "characters", this is ambiguous about whether those are Unicode
 
 Character encoding tends to be an area we often gloss over, so a quick primer:
 
-- Strings are just sequences of bytes that represent text according to some encoding
-  format.
+- Strings are just sequences of bytes that represent text according to some
+  encoding format.
 - When we talk about **characters**, we sometimes mean Unicode **code points**,
   which are 21-bit unsigned integers `0` through `0x10FFFF`.
-- Other times we might mean **grapheme clusters**, which are _perceived_ as single
-  characters but may be composed of multiple code points. For example, `á` can be
-  represented as the single code point `U+00E1` or as a sequence of `U+0061` followed
-  by `U+0301` (the letter `a`, then a combining acute accent).
+- Other times we might mean **grapheme clusters**, which are _perceived_ as
+  single characters but may be composed of multiple code points. For example,
+  `á` can be represented as the single code point `U+00E1` or as a sequence of
+  `U+0061` followed by `U+0301` (the letter `a`, then a combining acute
+  accent).
 - Protocol buffers uses **UTF-8** ("Unicode Transformation Format") which is a
-  variable-length encoding scheme that represents each code point as a
-  sequence of 1 to 4 single-byte **code units**.
+  variable-length encoding scheme that represents each code point as a sequence
+  of 1 to 4 single-byte **code units**.
 
 ## Guidance
 
@@ -85,8 +86,8 @@ identifiers **must** always be stored in Normalization Form C (see the next
 section).
 
 Imagine we're dealing with Spanish input "estar<strong>é</strong>" (the
-accented part will be bolded throughout). This text has 6 grapheme clusters, and
-can be represented by two distinct sequences of Unicode code points:
+accented part will be bolded throughout). This text has 6 grapheme clusters,
+and can be represented by two distinct sequences of Unicode code points:
 
 - Using 6 code points: `U+0065` `U+0073` `U+0074` `U+0061` `U+0072`
   **`U+00E9`**
@@ -132,17 +133,17 @@ identical by transforming any incoming string data into Normalized Form C or
 rejecting identifiers not in the normalized form.
 
 There is some debate about whether we should view strings as sequences of code
-points encoded into byte sequences (leading to uniqueness determined based on the
-byte-representation of said string) or to interpret strings as a higher level
-abstraction having many different possible byte-representations. The stance
-taken here is that we already have a field type for handling that: `bytes`.
-Fields of type `string` already express an opinion of the validity of an input
-(it must be valid UTF-8). As a result, treating two inputs that have identical
-normalized forms as different due to their underlying byte representation seems
-to go against the original intent of the `string` type. This distinction
-typically doesn't matter for strings that are opaque to our services (e.g.,
-`description` or `display_name`), however when we rely on strings to uniquely
-identify resources, we are forced to take a stance.
+points encoded into byte sequences (leading to uniqueness determined based on
+the byte-representation of said string) or to interpret strings as a higher
+level abstraction having many different possible byte-representations. The
+stance taken here is that we already have a field type for handling that:
+`bytes`. Fields of type `string` already express an opinion of the validity of
+an input (it must be valid UTF-8). As a result, treating two inputs that have
+identical normalized forms as different due to their underlying byte
+representation seems to go against the original intent of the `string` type.
+This distinction typically doesn't matter for strings that are opaque to our
+services (e.g., `description` or `display_name`), however when we rely on
+strings to uniquely identify resources, we are forced to take a stance.
 
 Put differently, our goal is to allow someone with text in any encoding (ASCII,
 UTF-16, UTF-32, etc) to interact with our APIs without a lot of "gotchas".
