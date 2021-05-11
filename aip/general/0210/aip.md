@@ -31,7 +31,7 @@ Character encoding tends to be an area we often gloss over, so a quick primer:
 
 ### Character definition
 
-**TL;DR:** In our APIs, "characters" means "Unicode code points".
+**TL;DR:** In our APIs, "character" means "Unicode code point".
 
 In API documentation (e.g., API reference documents, blog posts, marketing
 documentation, billing explanations, etc), "character" **must** be defined as a
