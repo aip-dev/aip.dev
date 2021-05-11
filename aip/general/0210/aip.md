@@ -132,7 +132,7 @@ identical by transforming any incoming string data into Normalized Form C or
 rejecting identifiers not in the normalized form.
 
 There is some debate about whether we should view strings as sequences of code
-points represented as bytes (leading to uniqueness determined based on the
+points encoded into byte sequences (leading to uniqueness determined based on the
 byte-representation of said string) or to interpret strings as a higher level
 abstraction having many different possible byte-representations. The stance
 taken here is that we already have a field type for handling that: `bytes`.
