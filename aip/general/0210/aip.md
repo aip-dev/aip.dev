@@ -42,7 +42,7 @@ Unicode code point.
 
 **TL;DR:** Set size limits in "characters" (as defined above).
 
-All string field length limits defined in API comments **must** be measured and
+All string field length limits defined in the API **must** be measured and
 enforced in characters as defined above. This means that there is an underlying
 maximum limit of (`4 * characters`) bytes, though this limit will only be hit
 when using exclusively characters that consist of 4 UTF-8 code units (32 bits).
