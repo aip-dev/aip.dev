@@ -24,8 +24,8 @@ Character encoding tends to be an area we often gloss over, so a quick primer:
   represented as the single code point `U+00E1` or as a sequence of `U+0061` followed
   by `U+0301` (the letter `a`, then a combining acute accent).
 - Protocol buffers uses **UTF-8** ("Unicode Transformation Format") which is a
-  variable-length encoding scheme using up to 4 **code units** (8-bit bytes)
-  per code point.
+  variable-length encoding scheme that represents each code point as a
+  sequence of 1 to 4 single-byte **code units**.
 
 ## Guidance
 
