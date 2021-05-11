@@ -69,8 +69,9 @@ tools need to reason about particular relationships while ignoring others,
 consider using a subresource instead.
 
 If atomic modifications are required, and if the array is functionally a set
-(meaning that order does not matter and duplicate values are not meaningful),
-the API **should** define custom methods using the verbs `Add` and `Remove`:
+(meaning that order does not matter, duplicate values are not meaningful, and
+non-comparable values such as `null` or `NaN` are not used), the API **should**
+define custom methods using the verbs `Add` and `Remove`:
 
 {% tab proto %}
 
