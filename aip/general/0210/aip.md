@@ -5,10 +5,10 @@ values and their encodings. This ranges from little ambiguities (like fields
 "limited to 1024 characters") all the way to billing confusion (are names and
 values of properties in Datastore billed based on characters or bytes?).
 
-In general, if limits are measured in bytes, we are discriminating
-against non-ASCII text since it takes up more space. On the other hand, if limits are
-measured in "characters", this is ambiguous about whether those are Unicode "code
-points", "code units" for a particular encoding (e.g. UTF-8 or UTF-16),
+In general, if limits are measured in bytes, we are discriminating against
+non-ASCII text since it takes up more space. On the other hand, if limits are
+measured in "characters", this is ambiguous about whether those are Unicode
+"code points", "code units" for a particular encoding (e.g. UTF-8 or UTF-16),
 "graphemes", or "grapheme clusters".
 
 ## Unicode primer
