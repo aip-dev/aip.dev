@@ -107,8 +107,8 @@ the API **should** define custom methods using the verbs `Add` and `Remove`:
   `string`).
   - For more complex data structures with a primary key, the API **should** use
     a map with the `Update` method instead.
-- The operation's name **must** begin with the word `add` or `remove`. The
-  remainder of the operation name **should** be the singular form of the field
+- The `operationId` **must** begin with the word `add` or `remove`. The
+  remainder of the `operationId` **should** be the singular form of the field
   being added.
 - The response **should** be the resource itself, and **should** fully-populate
   the resource structure.
