@@ -18,7 +18,7 @@ Character encoding tends to be an area we often gloss over, so a quick primer:
 - Strings are just ordered bytes that represent text according to some encoding
   format.
 - When we talk about **characters**, we sometimes mean Unicode **code points**,
-  which are numbers in the Unicode spec (up to 21 bits).
+  which are 21-bit unsigned integers `0` through `0x10FFFF`.
 - Other times we might mean **graphemes** or **grapheme clusters**, which may
   have multiple numeric representations and may be represented by more than one
   code point. For example, `á` may be represented as a composition of
