@@ -15,7 +15,7 @@ measured in "characters", this is ambiguous about whether those are Unicode
 
 Character encoding tends to be an area we often gloss over, so a quick primer:
 
-- Strings are just ordered bytes that represent text according to some encoding
+- Strings are just sequences of bytes that represent text according to some encoding
   format.
 - When we talk about **characters**, we sometimes mean Unicode **code points**,
   which are 21-bit unsigned integers `0` through `0x10FFFF`.
