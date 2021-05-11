@@ -61,8 +61,10 @@ billing is characters (e.g., $0.01 _per character_, not $0.01 _per byte_).
 ### Unique identifiers
 
 **TL;DR:** Unique identifiers **should** limit to ASCII, generally only
-letters, numbers, hyphens, and underscores, and **should not** start with a
-number.
+letters, numbers, hyphens, and underscores. Additionally, unique identifiers
+**should** start with a letter, **should** end in either a letter or number,
+and **should not** have hyphens or underscores that are next to other hyphens
+or underscores.
 
 Strings used as unique identifiers **should** limit inputs to ASCII characters,
 typically letters, numbers, hyphens, and underscores
