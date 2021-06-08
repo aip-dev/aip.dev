@@ -8,16 +8,17 @@ concept of time.
 ## Guidance
 
 Fields representing time **should** use a `string` field with values conforming
-to [ISO 8601][], such as `2012-04-21T11:00:00-0500`.
+to [RFC 3339][], such as `2012-04-21T15:00:00Z`.
 
-Services **may** use IDL-specific timestamps where applicable (such as
-[`google.protobuf.Timestamp`][timestamp] in protocol buffers) provided that the
-service converts values to ISO 8601 timestamp strings in JSON.
+Services **should** use IDL-specific timestamps or format indicators where
+applicable (such as [`google.protobuf.Timestamp`][timestamp] in protocol
+buffers, or `format: date-time` in OpenAPI) provided that the service converts
+values to RFC 3339 timestamp strings in JSON.
 
 ### Timestamps
 
 Fields that represent an absolute point in time (independent of any time zone
-or calendar) **should** use a `string` field with ISO 8601 values, and
+or calendar) **should** use a `string` field with RFC 3339 values, and
 **should** send values in UTC, with the `Z` time zone explicitly included.
 
 These fields **should** have names ending in `_time`, such as `create_time` or
@@ -25,47 +26,39 @@ These fields **should** have names ending in `_time`, such as `create_time` or
 
 Many timestamp fields refer to an activity (for example, `create_time` refers
 to when the applicable resource was created). For these, the field **should**
-be named with the `{imperative}_time` form. For example, if a book is being
-published, the field storing the time when this happens would use the
-imperative form of the verb "to publish" ("publish") resulting in a field
-called `publish_time`. Fields **should not** be named using the past tense
-(such as `published_time`, `created_time` or `last_updated_time`).
+be named with the `{root_word}_time` form. For example, if a book is being
+published, the field storing the time when this happens would use the root form
+of the verb "to publish" ("publish"), resulting in a field called
+`publish_time`. Fields **should not** be named using the past tense (such as
+`published_time`, `created_time` or `last_updated_time`).
+
+When accepting timestamps as input, services **should** canonicalize the
+timestamp into UTC, and return values in UTC.
 
 ### Durations
 
 Fields that represent a span between two points in time (independent of any
-time zone or calendar) **should** use a `string` field with ISO 8601 duration
-values, such as `P3Y6M4DT12H30M5S`. The field name **should** end with
-`_duration`.
+time zone or calendar) **should** use an `int` or `float` field if there is a
+single canonical unit (for example, `ttl_seconds` for an expiring resource, or
+`offset_seconds` for position in a video).
 
-Designators for zero values **may** be omitted in accordance with ISO 8601 (for
-example: `PT12H` is sufficient to represent "12 hours"), but at least one
-designator **must** be present (therefore, a zero duration is `PT0S` or `P0D`).
+If there is no canonical unit, the service **should** use a `string` field with
+[ISO 8601][] duration values, such as `P3Y6M4DT12H30M5S`. The field name
+**should** end with `_duration`. Designators for zero values **may** be omitted
+in accordance with ISO 8601 (for example: `PT12H` is sufficient to represent
+"12 hours"), but at least one designator **must** be present (therefore, a zero
+duration is `PT0S` or `P0D`).
 
-Services **may** use IDL-specific durations where applicable (such as
-[`google.protobuf.Duration`][timestamp] in protocol buffers) provided that the
+Services **should** use IDL-specific durations where applicable (such as
+[`google.protobuf.Duration`][duration] in protocol buffers) provided that the
 service converts values to ISO 8601 duration strings in JSON.
 
-### Relative time segments
+### Fractional seconds
 
-In some cases, it may be necessary to represent a time segment inside a stream.
-In these cases, a ISO 8601 duration value **should** be used, and the field
-name **should** end with `_offset`. To ensure that the meaning is clear, the
-field **must** have a comment noting the point that the offset is relative to.
-
-To illustrate this, consider a resource representing a segment of an audio
-stream:
-
-```typescript
-interface AudioSegment {
-  // The duration relative to the start of the stream representing the
-  // beginning of the segment.
-  startOffset: string;
-
-  // The total length of the segment.
-  segmentDuration: string;
-}
-```
+Services **may** support fractional seconds for both timestamps and durations.
+Services **may** also limit the supported precision, and **may** round values
+received from the user to the supported precision. However, services **should
+not** support precision beyond the nanosecond.
 
 ### Civil dates and times
 
@@ -78,7 +71,7 @@ fields representing civil times or datetimes **should** have names ending in
 
 ### Compatibility
 
-Occasionally, APIs are unable to use ISO 8601 strings for legacy or
+Occasionally, APIs are unable to use RFC 3339 strings for legacy or
 compatibility reasons. For example, an API may conform to a separate
 specification that mandates that timestamps be Unix timestamp integers.
 
@@ -98,5 +91,6 @@ use.
 <!-- prettier-ignore-start -->
 [duration]: https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/duration.proto
 [iso 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
+[rfc 3339]: https://datatracker.ietf.org/doc/html/rfc3339
 [timestamp]: https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/timestamp.proto
 <!-- prettier-ignore-end -->
