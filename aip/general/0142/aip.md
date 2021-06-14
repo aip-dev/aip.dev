@@ -38,9 +38,13 @@ timestamp into UTC, and return values in UTC.
 ### Durations
 
 Fields that represent a span between two points in time (independent of any
-time zone or calendar) **should** use an `int` or `float` field if there is a
-single canonical unit (for example, `ttl_seconds` for an expiring resource, or
+time zone or calendar) **should** use an `int` field if there is a single
+canonical unit (for example, `ttl_seconds` for an expiring resource, or
 `offset_seconds` for position in a video).
+
+**Note:** A `float` field **may** be used if fractional seconds are needed.
+However, only fractional seconds are permitted; other fractional units (such as
+hours or days) **must not** be used.
 
 If there is no canonical unit, the service **should** use a `string` field with
 [ISO 8601][] duration values, such as `P3Y6M4DT12H30M5S`. The field name
@@ -57,8 +61,10 @@ service converts values to ISO 8601 duration strings in JSON.
 
 Services **may** support fractional seconds for both timestamps and durations.
 Services **may** also limit the supported precision, and **may** round values
-received from the user to the supported precision. However, services **should
-not** support precision beyond the nanosecond.
+received from the user to the supported precision.
+
+**Note:** Services **should not** support precision more granular than the
+nanosecond.
 
 ### Civil dates and times
 
@@ -69,6 +75,11 @@ Fields representing civil dates **should** have names ending in `_date`, while
 fields representing civil times or datetimes **should** have names ending in
 `_time`.
 
+### Recurring time
+
+A service that needs to document a recurring event **should** use cronspec if
+cronspec is able to support the service's use case.
+
 ### Compatibility
 
 Occasionally, APIs are unable to use RFC 3339 strings for legacy or
@@ -78,8 +89,12 @@ specification that mandates that timestamps be Unix timestamp integers.
 In these situations, fields **may** use other types. If possible, the following
 naming conventions apply:
 
-- For integers, include the meaning (examples: `time`, `duration`, `delay`,
-  `latency`) **and** the unit of measurement (valid values: `seconds`,
+- Unix timestamps **should** use a `unix_time` suffix.
+  - Multipliers of Unix time (such as milliseconds) **should not** be used; if
+    they are unavoidable, the field name **should** use both `unix_time` and
+    the unit, such as `unix_time_millis`.
+- For other integers, include the meaning (examples: `time`, `duration`,
+  `delay`, `latency`) **and** the unit of measurement (valid values: `seconds`,
   `millis`, `micros`, `nanos`) as a final suffix. For example,
   `send_time_millis`.
 - For strings, include the meaning (examples: `time`, `duration`, `delay`,
