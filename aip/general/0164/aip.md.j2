@@ -69,15 +69,18 @@ long-running request pattern (AIP-151).
 ### List and Get
 
 Soft-deleted resources **should not** be returned in `List` (AIP-132) responses
-by default (unless `bool show_deleted` is true). `Get` (AIP-131) requests for
-soft-deleted resources **should** return the resource (rather than a
-`404 Not Found` error).
+by default (unless `bool show_deleted` is true).
+
+A `Get` (AIP-131) request for a soft deleted resource **should** error with
+`410 Gone` unless `bool show_deleted` is true, in which case soft-deleted
+resources **must** return the resource.
 
 Services that soft delete resources **may** choose a reasonable strategy for
 purging those resources, including automatic purging after a reasonable time
 (such as 30 days), allowing users to set an expiry time (AIP-214), or retaining
-the resources indefinitely. Regardless of what strategy is selected, the API
-**should** document when soft deleted resources will be completely removed.
+the resources indefinitely. Regardless of what strategy is selected, the
+service **should** document when soft deleted resources will be completely
+removed.
 
 ### Declarative-friendly resources
 
