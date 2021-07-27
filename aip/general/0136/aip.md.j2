@@ -27,7 +27,8 @@ apply consistently:
   the custom method maps more strongly to another HTTP verb.
   - Custom operations that serve as an alternative to get or list operations
     (such as `Search`) **should** use `GET`. These operations **must** be
-    idempotent and have no side effects.
+    idempotent and have no state changes or side effects (they should be safe
+    as defined in [RFC 7231][]).
   - Custom operations **should not** use `PATCH` or `DELETE`.
 - The HTTP URI **must** use a `:` character followed by the custom verb
   (`:archive` in the above example), and the verb in the URI **must** match the
@@ -52,7 +53,8 @@ apply consistently:
   the custom method maps more strongly to another HTTP verb.
   - Custom operations that serve as an alternative to get or list operations
     (such as `Search`) **should** use `GET`. These operations **must** be
-    idempotent and have no side effects.
+    idempotent and have no state changes or side effects (they should be safe
+    as defined in [RFC 7231][]).
   - Custom operations **should not** use `PATCH` or `DELETE`.
 - The HTTP URI **must** use a `:` character followed by the custom verb
   (`:archive` in the above example), and the verb in the URI **must** match the
@@ -120,3 +122,5 @@ what to do with them.
 An exception to this is for rarely-used, fundamentally imperative operations,
 such as a `Move` or `Rename` operation, for which there would not be an
 expectation of declarative support.
+
+[rfc 7231]: https://datatracker.ietf.org/doc/html/rfc7231#section-4.2.1
