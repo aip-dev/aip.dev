@@ -37,9 +37,9 @@ apply consistently:
 - The `body` clause in the `google.api.http` annotation **should** be `"*"`.
   - However, if using `GET` or `DELETE`, the `body` clause **must** be absent.
 - Custom operations **should** usually take a request message matching the RPC
-  name, with a `-Request` suffix.
+  name, with a -`Request` suffix.
 - Custom operations **should** usually return a response message matching the
-  RPC name, with a `-Response` suffix.
+  RPC name, with a -`Response` suffix.
   - When operating on a specific resource, a custom method **may** return the
     resource itself.
 
@@ -47,18 +47,18 @@ apply consistently:
 
 {% sample 'library.oas.yaml', '/publishers/{publisherId}/books/{bookId}:archive' %}
 
-- The name of the operation **should** be a verb followed by a noun.
-  - The name **must not** contain prepositions ("for", "with", etc.).
+- The `operationId` **should** be a verb followed by a noun.
+  - The `operationId` **must not** contain prepositions ("for", "with", etc.).
 - The HTTP method for custom operations **should** usually be `POST`, unless
   the custom method maps more strongly to another HTTP verb.
   - Custom operations that serve as an alternative to get or list operations
-    (such as `Search`) **should** use `GET`. These operations **must** be
-    idempotent and have no state changes or side effects (they should be safe
-    as defined in [RFC 7231][]).
+    (such as `Search`) **should** use `GET`, and require no request body. These
+    operations **must** be idempotent and have no state changes or side effects
+    (they should be safe as defined in [RFC 7231][]).
   - Custom operations **should not** use `PATCH` or `DELETE`.
 - The HTTP URI **must** use a `:` character followed by the custom verb
   (`:archive` in the above example), and the verb in the URI **must** match the
-  verb in the name of the RPC.
+  verb in the `operationId`.
   - If word separation is required, `camelCase` **must** be used.
 
 {% endtabs %}
@@ -120,7 +120,7 @@ AIPs), because declarative-friendly tools are unable to automatically determine
 what to do with them.
 
 An exception to this is for rarely-used, fundamentally imperative operations,
-such as a `Move` or `Rename` operation, for which there would not be an
-expectation of declarative support.
+such as a `Move`, `Rename`, or `Restart` operation, for which there would not
+be an expectation of declarative support.
 
 [rfc 7231]: https://datatracker.ietf.org/doc/html/rfc7231#section-4.2.1
