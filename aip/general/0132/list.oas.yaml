@@ -5,23 +5,48 @@ info:
   version: 1.0.0
 paths:
   /publishers/{publisherId}/books:
+    parameters:
+      - name: publisherId
+        in: path
+        description: The publisher to list books for.
+        required: true
+        schema:
+          type: string
     get:
       operationId: listBooks
       description: Get a collection of books.
+      parameters:
+        - name: pageToken
+          in: query
+          description: |
+            The page token.
+            If a `next_page_token` value was received on a previous
+            ListBooks call, providing it here will return the next page.
+          schema:
+            type: string
+        - name: maxPageSize
+          in: query
+          description: |
+            The maximum number of books to return.
+          schema:
+            type: integer
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListBooksResponse'
 components:
-  schema:
+  schemas:
     ListBooksResponse:
+      type: object
       description: A representation of a collection of books.
       properties:
         results:
-          type:
+          type: array
+          items:
+            '$ref': '#/components/schemas/Book'
         nextPageToken:
           type: string
           description: |
@@ -29,6 +54,7 @@ components:
             if there are more pages.
     Book:
       description: A representation of a single book.
+      type: object
       properties:
         name:
           type: string
@@ -48,5 +74,5 @@ components:
             type: string
           description: The author or authors of the book.
         rating:
-          type: float
+          type: number
           description: The rating assigned to the book.
