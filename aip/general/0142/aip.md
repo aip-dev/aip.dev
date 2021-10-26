@@ -59,12 +59,14 @@ service converts values to ISO 8601 duration strings in JSON.
 
 ### Fractional seconds
 
-Services **may** support fractional seconds for both timestamps and durations.
-Services **may** also limit the supported precision, and **may** round values
-received from the user to the supported precision.
+Services **may** support fractional seconds for both timestamps and durations,
+but **should not** support precision more granular than the nanosecond.
+Services **may** also limit the supported precision, and **may** _truncate_
+values received from the user to the supported precision.
 
-**Note:** Services **should not** support precision more granular than the
-nanosecond.
+**Note:** Truncation is recommended rather than rounding because rounding to
+the nearest second has the potential to change day, month, year, etc., which is
+surprisingly significant.
 
 ### Civil dates and times
 
