@@ -75,9 +75,11 @@ individual result being a resource:
   - If filtering is used, the `total_size` field **should** reflect the size of
     the collection _after_ the filter is applied.
 
-**Note:** List methods **should** return the same results for any user that has
-permission to make a successful List request on the collection. Search methods
-are more relaxed on this.
+**Note:** List methods **may** return the complete collection to any user with
+permission to make a successful List request on the collection, _or_ **may** filter
+the results to return only list elements for which the user has read permission.
+This behavior **should** defined and documented at the service level and all
+list operations of the service **should** follow the service definition.
 
 ### Errors
 
