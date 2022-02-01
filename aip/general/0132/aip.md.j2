@@ -76,10 +76,10 @@ individual result being a resource:
     the collection _after_ the filter is applied.
 
 **Note:** List methods **may** return the complete collection to any user with
-permission to make a successful List request on the collection, _or_ **may** filter
-the results to return only list elements for which the user has read permission.
-This behavior **should** defined and documented at the service level and all
-list operations of the service **should** follow the service definition.
+permission to make a successful List request on the collection, _or_ **may**
+return a collection only containing resources for which the user has read permission.
+This behavior **should** be clearly documented either for each List method or as
+a standard convention in service-level documentation.
 
 ### Errors
 
