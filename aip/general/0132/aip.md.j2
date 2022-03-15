@@ -29,11 +29,11 @@ Accept: application/json
 - There **must not** be a request body.
   - If a `GET` request contains a body, the body **must** be ignored, and
     **must not** cause an error.
-- The request **must not** require any fields in the query string. The request
-  **should not** include optional fields in the query string unless described
-  in this or another AIP.
-  - The request message **may** include fields for common design patterns
-    relevant to list methods, such as `string filter` and `string order_by`.
+- The request **must not** require any fields in the query string.
+  - The query string **may** include fields for common design patterns
+    relevant to list methods, such as `string filter` and `string orderBy`.
+  - The query string **may** include custom fields if necessary for a specific
+    resource, but not in place of any of the common fields for list methods.
 
 ### Responses
 
@@ -64,15 +64,15 @@ individual result being a resource:
 
 - The array of resources **must** be named using the English plural term for
   the resource, and contain resources with no additional wrapping.
-- The `string next_page_token` field **must** be included in the list response
-  struct. It **must** be set if there are subsequent pages, and **must not** be
+- The `string nextPageToken` field **must** be included in the list response
+  schema. It **must** be set if there are subsequent pages, and **must not** be
   set if the response represents the final page. For more information, see
   AIP-158.
-- The response struct **may** include a `int32 total_size` (or
-  `int64 total_size`) field with the number of items in the collection.
+- The response struct **may** include a `int32 totalSize` (or
+  `int64 totalSize`) field with the number of items in the collection.
   - The value **may** be an estimate (the field **should** clearly document
     this if so).
-  - If filtering is used, the `total_size` field **should** reflect the size of
+  - If filtering is used, the `totalSize` field **should** reflect the size of
     the collection _after_ the filter is applied.
 
 **Note:** List methods **may** return the complete collection to any user with
@@ -101,7 +101,7 @@ return `200 OK` with an empty results array, and not `404 Not Found`.
 ### Ordering
 
 `List` methods **may** allow clients to specify sorting order; if they do, the
-request message **should** contain a `string order_by` field.
+request message **should** contain a `string orderBy` field.
 
 - Values **should** be a comma separated list of fields. For example:
   `"foo,bar"`.
@@ -132,7 +132,7 @@ or pending deletion (and optionally purging them later).
 
 APIs that do this **should not** include deleted resources by default in list
 requests. APIs with soft deletion of a resource **should** include a
-`bool show_deleted` field in the list request that, if set, will cause
+`bool showDeleted` field in the list request that, if set, will cause
 soft-deleted resources to be included.
 
 ## Interface Definitions
