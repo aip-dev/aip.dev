@@ -79,7 +79,9 @@ individual result being a resource:
 permission to make a successful List request on the collection, _or_ **may**
 return a collection only containing resources for which the user has read permission.
 This behavior **should** be clearly documented either for each List method or as
-a standard convention in service-level documentation.
+a standard convention in service-level documentation. Permission checks on individual
+resources may have a negative performance impact so should be used only where
+absolutely necessary.
 
 ### Errors
 
@@ -87,9 +89,6 @@ If the user does not have sufficient permission to know that the collection
 exists, the service **should** reply with an HTTP 404 error, regardless of
 whether or not the collection exists. Permission **must** be checked prior to
 checking whether the collection exists.
-
-If the user has sufficient permission to know that the collection exists, but
-is unable to access it, the service **should** reply with an HTTP 403 error.
 
 If the user does have proper permission, but the requested collection does not
 exist (generally because the parent does not exist), the service **must** reply
