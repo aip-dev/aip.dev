@@ -42,7 +42,7 @@ individual result being a resource:
 
 ```json
 {
-  "books": [
+  "results": [
     {
       "name": "publishers/lacroix/books/les-mis",
       "isbn": "978-037-540317-0",
@@ -62,8 +62,8 @@ individual result being a resource:
 }
 ```
 
-- The array of resources **must** be named using the English plural term for
-  the resource, and contain resources with no additional wrapping.
+- The array of resources **must** be named `results` and contain resources with
+  no additional wrapping.
 - The `string nextPageToken` field **must** be included in the list response
   schema. It **must** be set if there are subsequent pages, and **must not** be
   set if the response represents the final page. For more information, see
