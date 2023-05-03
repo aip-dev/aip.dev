@@ -14,13 +14,13 @@
 
 1. The AIP project shall be governed by a steering committee, comprising at least five representatives from at least five distinct organizations.
 2. No more than 25% of the committee shall represent or be employed by the same organization.
-⋅⋅1. In the event that ambiguities arise regarding what constitutes "the same organization," a vote of the committee shall decide. Any members from the organizations under consideration may deliberate, but shall recuse themselves from the vote.
+    1. In the event that ambiguities arise regarding what constitutes "the same organization," a vote of the committee shall decide. Any members from the organizations under consideration may deliberate, but shall recuse themselves from the vote.
 3. Membership on the steering committee shall be by invitation of the current steering committee. The steering committee shall meet at least once annually to consider the addition, removal, or replacement of members.
 4. The members of the steering committee shall be maintained in a MAINTAINERS.md file in the [primary AIP GitHub repository](https://github.com/aip-dev/aip).
 5. Steering committee members accept the following responsibilities:
-⋅⋅1. Ownership of the charter, vision, and direction of the AIP project.
-⋅⋅2. Regular attendance and participation at stated committee meetings.
-⋅⋅3. Contribution of design guidance or code as appropriate, and reviewing the contributions of others.
+    1. Ownership of the charter, vision, and direction of the AIP project.
+    2. Regular attendance and participation at stated committee meetings.
+    3. Contribution of design guidance or code as appropriate, and reviewing the contributions of others.
 6. Steering committee members who are unable or unwilling to continue to perform the responsibilities described above may voluntarily step down from the committee or may be removed from the steering committee without prejudice. Former committee members will be designated as "emeritus" in the maintainers list.
 
 
@@ -31,7 +31,7 @@
 ## Article V: Meetings & Voting
 
 1. The steering committee shall hold a regular meeting on a cadence of its choosing, and shall keep minutes of said meetings in a GitHub repository set aside for that purpose, which shall be accessible by all steering committee members.
-⋅⋅1. Meetings and minutes may be public or private, at the discretion of the steering committee.
+    1. Meetings and minutes may be public or private, at the discretion of the steering committee.
 2. The steering committee ordinarily operates by consensus, and recording votes for each decision is not required (but the decision should be recorded in the minutes).
 3. In the event that a vote is required, an email shall be sent to each steering committee explaining the issue in question and allowing at least 10 business days for voting. The specifics of how elections are handled are at the discretion of the steering committee.
 
