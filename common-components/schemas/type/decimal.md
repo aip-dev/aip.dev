@@ -5,7 +5,7 @@ point representation in order to avoid precision errors.
 
 ## Schema
 
-A `Decimal` represents decimal numbesr in a form similar to scientific
+A `Decimal` represents a decimal number in a form similar to scientific
 notation.
 
 It has two fields:
