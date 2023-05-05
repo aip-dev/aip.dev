@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package api.type;
+
+option cc_enable_arenas = true;
+option go_package = "aip.dev/type/decimal;decimal";
+option java_multiple_files = true;
+option java_outer_classname = "DecimalProto";
+option java_package = "dev.aip.type";
+option objc_class_prefix = "AIPTYPE";
+
+// Represents a decimal number in a form similar to scientific notation.
+//
+// Examples:
+// 17            === {digits: 17   exponent: 0} (or just {digits: 17})
+// -0.005        === {digits: -5   exponent: -3}
+// 33.5 million  === {digits: 335  exponent: 5}
+// 11/8 (1.375)  === {digits: 1375 exponent: -3}
+message Decimal {
+  // The significant digits (a.k.a. significand or mantissa) of the number.
+  int64 digits = 1;
+
+  // Represents the position of the decimal point within the digits.
+  //
+  // When the exponent is 0, the value of the Decimal is simply the value of
+  // `digits`.
+  //
+  // When the exponent is > 0, represents the number of trailing zeroes after
+  // the digits.
+  //
+  // When the exponent is < 0, represents how many of the significant digits
+  // (and implicit leading zeroes, as needed) come after the decmial point.
+  //
+  // When unset, this value is implicitly zero (0).
+  int64 exponent = 2;
+}
