@@ -22,7 +22,7 @@
     2. Regular attendance and participation at stated committee meetings.
     3. Contribution of design guidance or code as appropriate, and reviewing the contributions of others.
 6. Steering committee members who are unable or unwilling to continue to perform the responsibilities described above may voluntarily step down from the committee or may be removed from the steering committee without prejudice. Former committee members will be designated as "emeritus" in the maintainers list.
-
+7. The steering committe can vote in additional maintainers who would be specifically responsible for merging and reviewing code in the aip-dev code repositories.
 
 ## Article IV: Source of Truth
 
@@ -32,7 +32,7 @@
 
 1. The steering committee shall hold a regular meeting on a cadence of its choosing, and shall keep minutes of said meetings in a GitHub repository set aside for that purpose, which shall be accessible by all steering committee members.
     1. Meetings and minutes may be public or private, at the discretion of the steering committee.
-2. The steering committee ordinarily operates by consensus, and recording votes for each decision is not required (but the decision should be recorded in the minutes).
+2. The steering committee ordinarily operates by consensus, and recording votes for each decision is not required (but the decision should be recorded in the minutes). When possible, decisions and voting shall be done using GitHub issues for transparency.
 3. In the event that a vote is required, an email shall be sent to each steering committee explaining the issue in question and allowing at least 10 business days for voting. The specifics of how elections are handled are at the discretion of the steering committee.
 
 ## Article VI: Amendment
