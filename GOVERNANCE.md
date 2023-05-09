@@ -22,7 +22,7 @@
     2. Regular attendance and participation at stated committee meetings.
     3. Contribution of design guidance or code as appropriate, and reviewing the contributions of others.
 6. Steering committee members who are unable or unwilling to continue to perform the responsibilities described above may voluntarily step down from the committee or may be removed from the steering committee without prejudice. Former committee members will be designated as "emeritus" in the maintainers list.
-7. The steering committe can vote in additional maintainers who would be specifically responsible for merging and reviewing code in the aip-dev code repositories.
+7. The steering committee may appoint additional maintainers, to whom it may delegate tasks as necessary.
 
 ## Article IV: Source of Truth
 
