@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package api.type;
+package aip.type;
 
 option cc_enable_arenas = true;
 option go_package = "aip.golang.org/genproto/common-components/type/money;money";
