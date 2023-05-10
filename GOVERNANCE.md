@@ -14,8 +14,7 @@
 ## Article II: Association
 
 1. The AIP project is a project of the Cloud Native Computing Foundation. As
-   such, it accepts the
-   [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/master/code-of-conduct.md).
+   such, it accepts the [CNCF Code of Conduct][0].
 
 ## Article III: Steering Committee
 
@@ -72,3 +71,5 @@
 
 This charter may be amended by a two-thirds supermajority of the steering
 committee, after conducting an vote as described in V§3.
+
+[0]: https://github.com/cncf/foundation/blob/master/code-of-conduct.md
