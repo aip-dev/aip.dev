@@ -9,7 +9,7 @@ option java_outer_classname = "MoneyProto";
 option java_package = "dev.aip.type";
 option objc_class_prefix = "AIP";
 
-import "api/type/decimal.proto";
+import "aip/type/decimal.proto";
 
 // Represents an amount of money with its currency type.
 message Money {
