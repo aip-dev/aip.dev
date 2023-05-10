@@ -23,7 +23,7 @@ It has two fields:
   after the digits.
 
   When the exponent is less than 0, represents how many of the significant
-  digits (and implicit leading zeroes, as needed) come after the decmial point.
+  digits (and implicit leading zeroes, as needed) come after the decimal point.
 
 The general formula for converting a `Decimal` to its numeric value is
 `digits * 10^exponent`, where `*` represents multplication and `^` represents
