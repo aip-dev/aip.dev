@@ -3,7 +3,7 @@ syntax = "proto3";
 package api.type;
 
 option cc_enable_arenas = true;
-option go_package = "aip.dev/type/money;money";
+option go_package = "aip.golang.org/genproto/common-components/type/money;money";
 option java_multiple_files = true;
 option java_outer_classname = "MoneyProto";
 option java_package = "dev.aip.type";
