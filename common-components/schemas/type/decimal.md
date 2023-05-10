@@ -26,7 +26,7 @@ It has two fields:
   digits (and implicit leading zeroes, as needed) come after the decmial point.
 
 The general formula for converting a `Decimal` to its numeric value is
-`digits * 10^exponent`, where `*` represents multplication and `^` represenets
+`digits * 10^exponent`, where `*` represents multplication and `^` represents
 exponentiation.
 
 ## Examples
