@@ -7,7 +7,7 @@ option go_package = "aip.golang.org/genproto/common-components/type/money;money"
 option java_multiple_files = true;
 option java_outer_classname = "MoneyProto";
 option java_package = "dev.aip.type";
-option objc_class_prefix = "AIPTYPE";
+option objc_class_prefix = "AIP";
 
 import "api/type/decimal.proto";
 
