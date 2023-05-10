@@ -21,7 +21,7 @@
 
 1. The AIP project shall be governed by a steering committee, comprising at
    least five representatives from at least five distinct organizations.
-2. No more than 25% of the committee shall represent or be employed by the same
+2. No more than one third of the committee shall represent or be employed by the same
    organization.
    1. In the event that ambiguities arise regarding what constitutes "the same
       organization," a vote of the committee shall decide. Any members from the
