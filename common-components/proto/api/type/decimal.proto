@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package api.type;
+package aip.type;
 
 option cc_enable_arenas = true;
-option go_package = "aip.dev/type/decimal;decimal";
+option go_package = "aip.golang.org/genproto/common-components/type/decimal;decimal";
 option java_multiple_files = true;
 option java_outer_classname = "DecimalProto";
 option java_package = "dev.aip.type";
-option objc_class_prefix = "AIPTYPE";
+option objc_class_prefix = "AIP";
 
 // Represents a decimal number in a form similar to scientific notation.
 //
@@ -17,8 +17,8 @@ option objc_class_prefix = "AIPTYPE";
 // 33.5 million  === {digits: 335  exponent: 5}
 // 11/8 (1.375)  === {digits: 1375 exponent: -3}
 message Decimal {
-  // The significant digits (a.k.a. significand or mantissa) of the number.
-  int64 digits = 1;
+  // The significant digits of the number.
+  int64 significand = 1;
 
   // Represents the position of the decimal point within the digits.
   //
@@ -32,5 +32,5 @@ message Decimal {
   // (and implicit leading zeroes, as needed) come after the decmial point.
   //
   // When unset, this value is implicitly zero (0).
-  int64 exponent = 2;
+  int32 exponent = 2;
 }
