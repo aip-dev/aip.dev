@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/product.schema.json",
+  "title": "Decimal",
+  "description": "Represents a decimal number in a form similar to scientific notation.\n\nExamples:\n17            === {significand: 17   exponent: 0} (or just {significand: 17})\n-0.005        === {significand: -5   exponent: -3}\n33.5 million  === {significand: 335  exponent: 5}\n11/8 (1.375)  === {significand: 1375 exponent: -3}",
+  "type": "object",
+  "properties": {
+    "significand": {
+      "description": "The significant digits of the number.",
+      "type": "integer",
+      "format": "int64",
+      "default": 0
+    },
+    "exponent": {
+      "description": "Represents the position of the decimal point within the significand.\n\nWhen the exponent is 0, the value of the Decimal is simply the value of\n`significand`.\n\nWhen the exponent is > 0, represents the number of trailing zeroes after\nthe significant digits.\n\nWhen the exponent is < 0, represents how many of the significant digits\n(and implicit leading zeroes, as needed) come after the decmial point.\n\nWhen unset, this value is implicitly zero (0).",
+      "type": "integer",
+      "format": "int32",
+      "default": 0
+    }
+  }
+}
