@@ -29,6 +29,9 @@ The general formula for converting a `Decimal` to its numeric value is
 `significant * 10^exponent`, where `*` represents multplication and `^`
 represents exponentiation.
 
+Note: The range of a Decmial exceeds that of a JSON `number` (double), as well
+as that of a `decimal64`.
+
 ## Examples
 
 - 17 === `{significand: 17, exponent: 0}` (or just `{significand: 17}`)

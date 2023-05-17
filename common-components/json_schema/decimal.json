@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.com/product.schema.json",
   "title": "Decimal",
-  "description": "Represents a decimal number in a form similar to scientific notation.\n\nExamples:\n17            === {significand: 17   exponent: 0} (or just {significand: 17})\n-0.005        === {significand: -5   exponent: -3}\n33.5 million  === {significand: 335  exponent: 5}\n11/8 (1.375)  === {significand: 1375 exponent: -3}",
+  "description": "Represents a decimal number in a form similar to scientific notation.\n\nExamples:\n17            === {significand: 17   exponent: 0} (or just {significand: 17})\n-0.005        === {significand: -5   exponent: -3}\n33.5 million  === {significand: 335  exponent: 5}\n11/8 (1.375)  === {significand: 1375 exponent: -3}\n\nNote that the range of a Decmial exceeds that of a JSON `number` (double), as well as that of a `decimal64`.",
   "type": "object",
   "properties": {
     "significand": {
