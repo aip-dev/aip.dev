@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'common-components/proto/**/*.proto'
+  workflow_dispatch:
 jobs:
   build-protos:
     runs-on: ubuntu-latest
