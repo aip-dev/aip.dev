@@ -2,9 +2,8 @@
 name: build-protos
 on:
   pull_request:
-  #   paths:
-  #     - 'common-components/proto/**/*.proto'
-  # workflow_dispatch:
+    paths:
+      - 'common-components/proto/**/*.proto'
 jobs:
   build-protos:
     runs-on: ubuntu-latest
