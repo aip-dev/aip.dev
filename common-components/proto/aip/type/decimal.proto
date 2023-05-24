@@ -28,12 +28,11 @@ message Decimal {
   // When the exponent is 0, the value of the Decimal is simply the value of
   // `significand`.
   //
-  // When the exponent is > 0, represents the number of trailing zeroes after
-  // the significant digits.
+  // When the exponent is greater than 0, represents the number of trailing
+  // zeroes after the significant digits.
   //
-  // When the exponent is < 0, represents how many of the significant digits
-  // (and implicit leading zeroes, as needed) come after the decmial point.
-  //
-  // When unset, this value is implicitly zero (0).
+  // When the exponent is less than 0, represents how many of the significant
+  // digits (and implicit leading zeroes, as needed) come after the decmial
+  // point.
   int32 exponent = 2;
 }

@@ -16,8 +16,8 @@ It has two fields:
   deicmal point within the value of the `significand` field; it is the power of
   ten to which `significand` should be raised.
 
-  When this value is unset or `0`; in that case, the value of the `Decimal` is
-  simply the value of `significand`.
+  When the exponent is `0`, the value of the `Decimal` is simply the value of
+  `significand`.
 
   When the exponent is greater than 0, represents the number of trailing zeroes
   after the significant digits.
@@ -34,7 +34,7 @@ as that of a `decimal64`.
 
 ## Examples
 
-- 17 === `{significand: 17, exponent: 0}` (or just `{significand: 17}`)
+- 17 === `{significand: 17, exponent: 0}`
 - -0.005 === `{significand: -5, exponent: -3}`
 - 33.5 million === `{significand: 335, exponent: 5}`
 - 11/8 === 1.375 === `{significand: 1375, exponent: -3}`
