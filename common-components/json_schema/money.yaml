@@ -10,6 +10,10 @@ description: |
   One and a half Bitcoin ===
     `{"currency_code": "X-BTC", amount: {"significand": -5 exponent: -3}}`
 type: object
+required:
+- currency_code
+- amount
+additionalProperties: false
 properties:
   currency_code:
     description: |
