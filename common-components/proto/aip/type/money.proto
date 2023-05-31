@@ -15,9 +15,9 @@ import "aip/type/decimal.proto";
 //
 // Examples:
 //
-// Five US dollars === `{currency_code: "USD" amount: {significand: 5}}`
+// Five US dollars === `{currency_code: "USD" quantity: {significand: 5}}`
 // One and a half Bitcoin ===
-//   `{currency_code: "X-BTC" amount: {significand: -5 exponent: -3}}`
+//   `{currency_code: "X-BTC" quantity: {significand: 15 exponent: -1}}`
 message Money {
   // A currency code.
   //
@@ -34,6 +34,6 @@ message Money {
   //   "X-RBX" - Potential API-defined extension for the virtual currency Robux.
   string currency_code = 1;
 
-  // The amount of currency.
-  Decimal amount = 2;
+  // The quantity of currency.
+  Decimal quantity = 2;
 }

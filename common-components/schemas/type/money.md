@@ -21,14 +21,14 @@ A `Money` has two fields:
   - "X-BTC" - Potential API-defined extension for Bitcoin.
   - "X-.RBX" - Potential API-defined extension for the virtual currency Robux
 
-- The `amount` field is a field of type [`Decimal`][], representing the amount
-  of currency.
+- The `quantity` field is a field of type [`Decimal`][], representing the
+  quantity of currency.
 
 ## Examples
 
-- Five US dollars === `{currency_code: "USD", amount: {significand: 5}}`
+- Five US dollars === `{currency_code: "USD", quantity: {significand: 5}}`
 - One and a half Bitcoin ===
-  `{currency_code: "X-BTC", amount: {significand: -5, exponent: -3}}`
+  `{currency_code: "X-BTC", quantity: {significand: 15, exponent: -1}}`
 
 <!--prettier-ignore-start-->
 [`Decimal`]: ./decimal.md

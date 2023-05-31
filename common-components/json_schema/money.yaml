@@ -6,13 +6,13 @@ description: |
 
   Examples:
 
-  Five US dollars === `{"currency_code": "USD", amount: {"significand": 5}}`
+  Five US dollars === `{"currency_code": "USD", quantity: {"significand": 5}}`
   One and a half Bitcoin ===
-    `{"currency_code": "X-BTC", amount: {"significand": -5 exponent: -3}}`
+    `{"currency_code": "X-BTC", quantity: {"significand": 15 exponent: -1}}`
 type: object
 required:
 - currency_code
-- amount
+- quantity
 additionalProperties: false
 properties:
   currency_code:
@@ -31,6 +31,6 @@ properties:
         "X-BTC" - Potential API-defined extension for Bitcoin.
         "X-RBX" - Potential API-defined extension for the virtual currency Robux.
     type: string
-  amount:
-    description: The amount of currency.
+  quantity:
+    description: The quantity of currency.
     $ref: decimal.yaml#/definitions/Decimal
