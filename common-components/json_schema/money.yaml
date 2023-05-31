@@ -6,9 +6,9 @@ description: |
 
   Examples:
 
-  Five US dollars === `{"currency_code": "USD", quantity: {"significand": 5}}`
+  Five US dollars === `{"currency_code": "USD", "quantity": {"significand": 5}}`
   One and a half Bitcoin ===
-    `{"currency_code": "X-BTC", quantity: {"significand": 15 exponent: -1}}`
+    `{"currency_code": "X-BTC", "quantity": {"significand": 15, "exponent": -1}}`
 type: object
 required:
 - currency_code
