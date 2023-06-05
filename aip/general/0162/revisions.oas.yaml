@@ -1,0 +1,205 @@
+---
+openapi: 3.0.3
+info:
+  title: Library
+  version: 1.0.0
+paths:
+  /publishers/{publisherId}/books/{bookId}:
+    parameters:
+    - $ref: "#/components/parameters/PublisherId"
+    - $ref: "#/components/parameters/BookId"
+    get:
+      operationId: getBook
+      description: Retrieve a single book.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+
+  /publishers/{publisherId}/books/{bookId}:listRevisions:
+    parameters:
+    - $ref: "#/components/parameters/PublisherId"
+    - $ref: "#/components/parameters/BookId"
+    get:
+      operationId: listBookRevisions
+      description: List all revisions of a single book.
+      parameters:
+        - name: maxPageSize
+          in: query
+          schema:
+            type: integer
+            format: int32
+          description: The maximum number of revisions to return per page.
+        - name: pageToken
+          in: query
+          schema:
+            type: string
+          description: |
+            The page token, received from a previous ListBookRevisions call.
+            Provide this to retrieve the subsequent page.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: Response structure for listing book revisions.
+                type: object
+                properties:
+                  books:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Book'
+                    description: The revisions of the book.
+                  nextPageToken:
+                    type: string
+                    description: |
+                      A token that can be sent as `pageToken` to retrieve the
+                      next page.
+
+                      If this field is omitted, there are no subsequent pages.
+
+  /publishers/{publisherId}/books/{bookId}@{revisionId}:tagRevision:
+    parameters:  
+    - $ref: "#/components/parameters/PublisherId"
+    - $ref: "#/components/parameters/BookId"
+    - $ref: "#/components/parameters/RevisionId"
+    post:
+      operationId: tagBookRevision
+      description: |
+        Tag a single book revision with a user-specified tag.
+        The tag may then be used in place of the canonical revision ID.
+
+        If a tag is sent that already exists, the tag will be removed from its
+        original revision and assigned to the provided revision.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Request structure for tagging a book revision.
+              type: object
+              properties:
+                tag:
+                  type: string
+                  description: |
+                    The tag to apply.
+                  maxLength: 40
+                  pattern: "^[a-z][a-z0-9-]*[a-z0-9]$"
+              required: ["tag"]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+
+  /publishers/{publisherId}/books/{bookId}@{revisionId}:deleteRevision:
+    parameters:  
+    - $ref: "#/components/parameters/PublisherId"
+    - $ref: "#/components/parameters/BookId"
+    - $ref: "#/components/parameters/RevisionId"
+    delete:
+      operationId: deleteBookRevision
+      description: Delete a single revision of this book.
+      responses:
+        '204':
+          description: Revision deleted
+
+  /publishers/{publisherId}/books/{bookId}:commit:
+    parameters:  
+    - $ref: "#/components/parameters/PublisherId"
+    - $ref: "#/components/parameters/BookId"
+    post:
+      operationId: commitBook
+      description: Save a new, discrete revision snapshot of the given book.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+
+  /publishers/{publisherId}/books/{bookId}:rollback:
+    parameters:  
+    - $ref: "#/components/parameters/PublisherId"
+    - $ref: "#/components/parameters/BookId"
+    post:
+      operationId: rollbackBook
+      description: |
+        Rollback the primary revision of a book to a previous revision.
+
+        This creates a new revision, with a new revision ID, with the contents
+        of the provided revision, as the most recent revision in the sequence.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              description: |
+                Request structure for rolling back a book to a previous revision.
+              type: object
+              properties:
+                revisionId:
+                  type: string
+                  description: |
+                    The revision ID to roll back to.
+                    It must be a revision of the same book.
+                  example: c7cfa2a8
+              required: ["revisionId"]
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+
+components:
+  parameters:
+    PublisherId:
+      name: publisherId
+      in: path
+      description: The id of the book publisher.
+      required: true
+      schema:
+        type: string
+    BookId:
+      name: bookId
+      in: path
+      description: The id of the book.
+      required: true
+      schema:
+        type: string
+    RevisionId:
+      name: revisionId
+      in: path
+      description: The id of a revision of the book.
+      required: true
+      schema:
+        type: string
+  schemas:
+    Book:
+      description: A representation of a single book.
+      properties:
+        id:
+          type: string
+          description: |
+            The resource ID of the book.
+            Format: publishers/{publisher}/books/{book}
+        # Other fields...
+        revisionId:
+          type: string
+          description: |
+            The revision ID of the book.
+            A new revision is committed whenever the book is changed in any way.
+            The format is an 8-character hexadecimal string.
+        revisionCreateTime:
+          type: string
+          format: date-time
+          description: The timestamp when the revision was created.
