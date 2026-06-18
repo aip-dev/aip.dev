@@ -7,9 +7,9 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    container: node:20
+    container: node:24
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - name: Install prettier.
         run: npm install --global prettier
       - name: Verify proper formatting.
